@@ -1,0 +1,118 @@
+Here's a complete list of the endpoints for our TikTok-like backend server:
+
+User Authentication and Management:
+
+POST /api/users/register - Register a new user
+POST /api/users/login - Login a user
+POST /api/users/logout - Logout a user
+GET /api/users/:id - Fetch a user's profile
+PUT /api/users/:id - Update a user's profile
+PUT /api/users/:id/password - Change user's password
+POST /api/users/forgot-password - Initiate password reset
+POST /api/users/reset-password - Reset password with token
+
+
+Social Interactions:
+
+POST /api/users/:id/follow - Follow a user
+POST /api/users/:id/unfollow - Unfollow a user
+GET /api/users/:id/followers - Get user's followers
+GET /api/users/:id/following - Get users followed by this user
+POST /api/users/:id/block - Block a user
+POST /api/users/:id/unblock - Unblock a user
+
+
+Video Management:
+
+POST /api/videos - Upload a new video
+GET /api/videos - Fetch recent videos (for discovery)
+GET /api/users/:id/videos - Fetch all videos for a specific user
+GET /api/videos/:id - Get details of a specific video
+PUT /api/videos/:id - Update video details (title, description, etc.)
+DELETE /api/videos/:id - Delete a specific video
+POST /api/videos/:id/report - Report a video
+
+
+Video Interactions:
+
+POST /api/videos/:id/like - Like a video
+POST /api/videos/:id/unlike - Unlike a video
+POST /api/videos/:id/comment - Comment on a video
+PUT /api/videos/:id/comments/:commentId - Edit a comment
+DELETE /api/videos/:id/comments/:commentId - Delete a comment
+POST /api/videos/:id/share - Share a video
+
+
+Content Discovery:
+
+GET /api/feed - Fetch personalized feed (videos from followed users)
+GET /api/trending - Get trending videos
+GET /api/search - Search for users and videos
+GET /api/hashtags/:tag - Get videos by hashtag
+GET /api/challenges - Get current challenges/trends
+
+
+User Engagement:
+
+POST /api/duets/:videoId - Create a duet with another video
+POST /api/reactions/:videoId - Add a reaction to a video
+GET /api/notifications - Get user notifications
+PUT /api/notifications/:id/read - Mark a notification as read
+
+
+Analytics:
+
+GET /api/users/:id/analytics - Get user's account analytics
+GET /api/videos/:id/analytics - Get video performance analytics
+
+
+Monetization:
+
+POST /api/users/:id/creator-program - Apply for creator program
+GET /api/users/:id/earnings - Get user's earnings information
+POST /api/donations/:userId - Send a donation to a creator
+
+
+Content Moderation:
+
+POST /api/moderation/report - Report content for moderation
+GET /api/moderation/guidelines - Get community guidelines
+
+
+Live Streaming:
+
+POST /api/live/start - Start a live stream
+POST /api/live/end - End a live stream
+GET /api/live/active - Get currently active live streams
+POST /api/live/:id/join - Join a live stream
+POST /api/live/:id/leave - Leave a live stream
+POST /api/live/:id/comment - Comment on a live stream
+
+
+User Settings:
+
+GET /api/settings - Get user settings
+PUT /api/settings - Update user settings
+PUT /api/settings/privacy - Update privacy settings
+PUT /api/settings/notifications - Update notification preferences
+
+
+Explore:
+
+GET /api/explore/categories - Get content categories
+GET /api/explore/category/:id - Get content for a specific category
+
+
+
+This expanded API structure covers a wide range of features found in modern social media and video-sharing platforms, including:
+
+Enhanced user management and security
+Advanced social interactions
+Comprehensive video interactions
+Content discovery and exploration
+User engagement features like duets and reactions
+Analytics for users and content
+Monetization options for creators
+Content moderation tools
+Live streaming capabilities
+User settings and privacy controls
