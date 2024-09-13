@@ -1,33 +1,57 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  following: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Reference to the User model
+    username: {
+        type: String,
+        required: true,
+        unique: true,
     },
-  ],
-  followers: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Reference to the User model
+    email: {
+        type: String,
+        required: true,
+        unique: true,
     },
-  ],
-  // Additional fields...
-});
+    password: {
+        type: String,
+        required: true,
+    },
+    profilePicture: {
+        type: String,
+        default: 'default-profile.png',
+    },
+    following: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
+    followers: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
+    emailVerificationToken: {
+        type: String,
+    },
+    isEmailVerified: {
+        type: Boolean,
+        default: false,
+    },
+    resetPasswordToken: {
+        type: String,
+    },
+    resetPasswordExpires: {
+        type: Date,
+    },
+    twoFactorEnabled: {
+        type: Boolean,
+        default: false,
+    },
+    twoFactorSecret: {
+        type: String,
+    },
+}, { timestamps: true });
 
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
+module.exports = User;

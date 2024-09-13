@@ -10,8 +10,10 @@ const {
     forgotPassword,
     resetPassword,
     toggle2FA,
-} = require('../controllers/userController');
+    updateProfilePicture
+} = require('../controllers/userController'); // Make sure all functions are imported correctly
 const protect = require('../middleware/authMiddleware');
+const uploadImage = require('../middleware/uploadMiddleware');
 
 const router = express.Router();
 
@@ -26,5 +28,6 @@ router.put('/change-password', protect, changePassword);
 router.post('/forgot-password', forgotPassword);
 router.post('/reset-password', resetPassword);
 router.post('/toggle-2fa', protect, toggle2FA);
+router.post('/upload/profile-picture', protect, uploadImage, updateProfilePicture);
 
 module.exports = router;
