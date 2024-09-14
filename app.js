@@ -17,12 +17,9 @@ const app = express();
 // Middlewares
 app.use(express.json());
 app.use(helmet());
-app.use(cors({
-  origin: 'http://127.0.0.1:5500/index.html', // or the specific frontend URL you are using
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors({}));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 // Rate limiting middleware
 const limiter = rateLimit({

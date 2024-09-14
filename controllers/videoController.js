@@ -39,7 +39,7 @@ const upload = multer({
 const uploadVideoFile = upload.single("video");
 
 // Upload Video Controller
-exports.uploadVideo = async (req, res) => {
+const uploadVideo = async (req, res) => {
   try {
     const { title, description } = req.body;
     if (!req.file) {
@@ -61,14 +61,52 @@ exports.uploadVideo = async (req, res) => {
     res.status(201).json({ message: "Video uploaded successfully", videoUrl });
   } catch (error) {
     console.error("Error during video upload:", error);
-    res
-      .status(500)
-      .json({ error: "Failed to upload video. Please try again." });
+    res.status(500).json({ error: "Failed to upload video. Please try again." });
+  }
+};
+
+// Stream Video Controller
+const streamVideo = async (req, res) => {
+  try {
+    const video = await Video.findById(req.params.id);
+
+    if (!video) return res.status(404).json({ error: "Video not found" });
+
+    const videoPath = path.join(__dirname, '..', video.videoUrl);
+    const stat = fs.statSync(videoPath);
+    const fileSize = stat.size;
+    const range = req.headers.range;
+
+    if (range) {
+      const parts = range.replace(/bytes=/, "").split("-");
+      const start = parseInt(parts[0], 10);
+      const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+      const chunksize = end - start + 1;
+      const file = fs.createReadStream(videoPath, { start, end });
+      const head = {
+        'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': chunksize,
+        'Content-Type': 'video/mp4', // Adjust this based on your video type
+      };
+      res.writeHead(206, head);
+      file.pipe(res);
+    } else {
+      const head = {
+        'Content-Length': fileSize,
+        'Content-Type': 'video/mp4', // Adjust this based on your video type
+      };
+      res.writeHead(200, head);
+      fs.createReadStream(videoPath).pipe(res);
+    }
+  } catch (error) {
+    console.error("Error streaming video:", error);
+    res.status(500).json({ error: "Failed to stream video." });
   }
 };
 
 // Get Videos Controller
-exports.getVideos = async (req, res) => {
+const getVideos = async (req, res) => {
   try {
     const videos = await Video.find()
       .populate("user", "username")
@@ -81,7 +119,7 @@ exports.getVideos = async (req, res) => {
 };
 
 // Like Video Controller
-exports.likeVideo = async (req, res) => {
+const likeVideo = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id);
 
@@ -105,7 +143,7 @@ exports.likeVideo = async (req, res) => {
 };
 
 // Comment on Video Controller
-exports.commentOnVideo = async (req, res) => {
+const commentOnVideo = async (req, res) => {
   try {
     const { text } = req.body;
 
@@ -123,9 +161,7 @@ exports.commentOnVideo = async (req, res) => {
     video.comments.push(newComment._id);
     await video.save();
 
-    res
-      .status(201)
-      .json({ message: "Comment added successfully", comment: newComment });
+    res.status(201).json({ message: "Comment added successfully", comment: newComment });
   } catch (error) {
     console.error("Error commenting on video:", error);
     res.status(500).json({ error: "Failed to add comment." });
@@ -133,7 +169,7 @@ exports.commentOnVideo = async (req, res) => {
 };
 
 // Delete Video Controller
-exports.deleteVideo = async (req, res) => {
+const deleteVideo = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id);
 
@@ -157,5 +193,11 @@ exports.deleteVideo = async (req, res) => {
   }
 };
 
-// Export the upload middleware
+// Export the upload middleware and controllers
 exports.uploadVideoFile = uploadVideoFile;
+exports.uploadVideo = uploadVideo;
+exports.streamVideo = streamVideo;
+exports.getVideos = getVideos;
+exports.likeVideo = likeVideo;
+exports.commentOnVideo = commentOnVideo;
+exports.deleteVideo = deleteVideo;

@@ -5,6 +5,7 @@ const {
   likeVideo,
   commentOnVideo,
   uploadVideoFile,
+  streamVideo,
 } = require("../controllers/videoController");
 const protect = require("../middleware/authMiddleware");
 
@@ -21,5 +22,8 @@ router.put("/:id/like", protect, likeVideo);
 
 // Route to comment on a video
 router.post("/:id/comment", protect, commentOnVideo);
+
+// Route to stream a video
+router.get("/:id/stream", streamVideo);
 
 module.exports = router;

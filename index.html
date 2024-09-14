@@ -225,14 +225,14 @@
           mediaElement.className = "media-item";
 
           mediaElement.innerHTML = `
-    <h4>${item.title}</h4>
-    <p>${item.description}</p>
-    <video controls>
+      <h4>${item.title}</h4>
+      <p>${item.description}</p>
+      <video controls>
         <source src="http://localhost:5000/${item.videoUrl}" type="video/mp4">
         Your browser does not support the video tag.
-    </video>
-    <p>Uploaded by: ${item.user?.username || "Unknown"}</p>
-`;
+      </video>
+      <p>Uploaded by: ${item.user?.username || "Unknown"}</p>
+    `;
 
           feedContainer.appendChild(mediaElement);
         });

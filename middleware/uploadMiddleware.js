@@ -9,11 +9,11 @@ const ensureDirExists = (dir) => {
   }
 };
 
-// Configure multer for image uploads
+// Configure multer for video uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const dir = path.join(__dirname, '../uploads/images');
-    ensureDirExists(dir); // Ensure the directory exists
+    const dir = path.join(__dirname, '../uploads/videos');
+    ensureDirExists(dir);
     cb(null, dir);
   },
   filename: (req, file, cb) => {
@@ -21,16 +21,16 @@ const storage = multer.diskStorage({
   }
 });
 
-const uploadImage = multer({
+const uploadVideo = multer({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // Limit to 5 MB
+  limits: { fileSize: 500 * 1024 * 1024 }, // Set file size limit to 500 MB
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();
-    if (!['.jpg', '.jpeg', '.png'].includes(ext)) {
-      return cb(new Error('Only image files are allowed'), false);
+    if (!['.mp4', '.mov', '.avi'].includes(ext)) {
+      return cb(new Error('Only video files are allowed'), false);
     }
     cb(null, true);
   }
 });
 
-module.exports = uploadImage.single('image'); // Middleware for single image upload
+module.exports = uploadVideo.single('video'); // Middleware for single video upload
