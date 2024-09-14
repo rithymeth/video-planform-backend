@@ -10,8 +10,10 @@ const {
     forgotPassword,
     resetPassword,
     toggle2FA,
-    updateProfilePicture
-} = require('../controllers/userController'); // Make sure all functions are imported correctly
+    updateProfilePicture,
+    searchUsers, // Import the new search function
+    addUser      // Import the new add user function if needed
+} = require('../controllers/userController');
 const protect = require('../middleware/authMiddleware');
 const uploadImage = require('../middleware/uploadMiddleware');
 
@@ -26,9 +28,10 @@ router.get('/profile', protect, fetchUserProfile);
 router.put('/profile', protect, updateUserProfile);
 router.post('/change-password', protect, changePassword);
 router.post('/forgot-password', forgotPassword);
-router.post('/request-reset-password', forgotPassword);
-router.post('/reset-password/:token', resetPassword); // Make sure `resetPassword` is correctly imported and defined
+router.post('/reset-password/:token', resetPassword);
 router.post('/toggle-2fa', protect, toggle2FA);
 router.post('/upload/profile-picture', protect, uploadImage, updateProfilePicture);
+router.get('/search', protect, searchUsers); // Route for searching users
+router.post('/add', protect, addUser); // Route for adding a user
 
 module.exports = router;

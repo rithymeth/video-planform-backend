@@ -53,5 +53,8 @@ const userSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
+// Add a text index to the username and email fields for efficient searching
+userSchema.index({ username: 'text', email: 'text' });
+
 const User = mongoose.model('User', userSchema);
 module.exports = User;
