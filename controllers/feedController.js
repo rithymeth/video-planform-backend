@@ -15,7 +15,7 @@ exports.getUserFeed = async (req, res, next) => {
             .populate('user', 'username')
             .populate('comments');
 
-        res.json({ feed: videos });
+        res.json(videos); // Return the videos array directly
     } catch (error) {
         next(error);
     }

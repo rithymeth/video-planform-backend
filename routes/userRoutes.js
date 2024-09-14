@@ -24,9 +24,10 @@ router.post('/login', loginUser);
 router.post('/logout', protect, logoutUser);
 router.get('/profile', protect, fetchUserProfile);
 router.put('/profile', protect, updateUserProfile);
-router.put('/change-password', protect, changePassword);
+router.post('/change-password', protect, changePassword);
 router.post('/forgot-password', forgotPassword);
-router.post('/reset-password', resetPassword);
+router.post('/request-reset-password', forgotPassword);
+router.post('/reset-password/:token', resetPassword); // Make sure `resetPassword` is correctly imported and defined
 router.post('/toggle-2fa', protect, toggle2FA);
 router.post('/upload/profile-picture', protect, uploadImage, updateProfilePicture);
 
