@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const Joi = require("joi");
@@ -37,10 +37,10 @@ exports.registerUser = async (req, res, next) => {
 
   try {
     const userExists = await User.findOne({ email });
-    if (userExists) return res.status(400).json({ error: "Email already registered" });
+    if (userExists)
+      return res.status(400).json({ error: "Email already registered" });
 
     const hashedPassword = await bcrypt.hash(password, 12);
-
     const emailVerificationToken = crypto.randomBytes(32).toString("hex");
 
     const newUser = new User({
@@ -53,14 +53,19 @@ exports.registerUser = async (req, res, next) => {
 
     await newUser.save();
 
-    const verificationUrl = `${req.protocol}://${req.get("host")}/api/users/verify-email/${emailVerificationToken}`;
+    const verificationUrl = `${req.protocol}://${req.get(
+      "host"
+    )}/api/users/verify-email/${emailVerificationToken}`;
     await sendEmail({
       email: newUser.email,
       subject: "Verify your email",
       message: `Please verify your email by clicking on this link: ${verificationUrl}`,
     });
 
-    res.status(201).json({ message: "User registered successfully! Please check your email to verify your account." });
+    res.status(201).json({
+      message:
+        "User registered successfully! Please check your email to verify your account.",
+    });
   } catch (error) {
     next(error);
   }
@@ -97,17 +102,28 @@ exports.loginUser = async (req, res, next) => {
   try {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ error: "User not found" });
-    if (!user.isEmailVerified) return res.status(401).json({ error: "Please verify your email first" });
+    if (!user.isEmailVerified)
+      return res.status(401).json({ error: "Please verify your email first" });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(401).json({ error: "Invalid credentials" });
 
     if (user.twoFactorEnabled) {
       if (!twoFactorToken) {
-        const token = speakeasy.totp({ secret: user.twoFactorSecret, encoding: "base32" });
-        await sendEmail({ email: user.email, subject: "Your 2FA Code", message: `Your 2FA code is: ${token}` });
+        const token = speakeasy.totp({
+          secret: user.twoFactorSecret,
+          encoding: "base32",
+        });
+        await sendEmail({
+          email: user.email,
+          subject: "Your 2FA Code",
+          message: `Your 2FA code is: ${token}`,
+        });
 
-        return res.status(200).json({ message: "2FA code sent to your email. Please enter the code to proceed." });
+        return res.status(200).json({
+          message:
+            "2FA code sent to your email. Please enter the code to proceed.",
+        });
       } else {
         const isValid = speakeasy.totp.verify({
           secret: user.twoFactorSecret,
@@ -116,7 +132,8 @@ exports.loginUser = async (req, res, next) => {
           window: 1,
         });
 
-        if (!isValid) return res.status(401).json({ error: "Invalid 2FA code" });
+        if (!isValid)
+          return res.status(401).json({ error: "Invalid 2FA code" });
       }
     }
 
@@ -135,7 +152,9 @@ exports.logoutUser = (req, res) => {
 // Fetch User Profile
 exports.fetchUserProfile = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user.id).select("-password -twoFactorSecret");
+    const user = await User.findById(req.user.id).select(
+      "-password -twoFactorSecret"
+    );
     if (!user) return res.status(404).json({ error: "User not found" });
 
     res.json({ user });
@@ -147,16 +166,29 @@ exports.fetchUserProfile = async (req, res, next) => {
 // Update User Profile
 exports.updateUserProfile = async (req, res, next) => {
   const { username, email } = req.body;
+  const profilePicture = req.file ? req.file.path : undefined; // Check if a file is uploaded
 
   try {
     const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ error: "User not found" });
 
+    // Update username and email if provided
     if (username) user.username = username;
     if (email) user.email = email;
 
+    // Update profile picture if a new one is uploaded
+    if (profilePicture) user.profilePicture = profilePicture;
+
     await user.save();
-    res.json({ message: "Profile updated successfully", user: { username: user.username, email: user.email } });
+
+    res.json({
+      message: "Profile updated successfully",
+      user: {
+        username: user.username,
+        email: user.email,
+        profilePicture: user.profilePicture, // Include the updated profile picture URL
+      },
+    });
   } catch (error) {
     next(error);
   }
@@ -171,7 +203,8 @@ exports.changePassword = async (req, res, next) => {
     if (!user) return res.status(404).json({ error: "User not found" });
 
     const isMatch = await bcrypt.compare(oldPassword, user.password);
-    if (!isMatch) return res.status(401).json({ error: "Invalid old password" });
+    if (!isMatch)
+      return res.status(401).json({ error: "Invalid old password" });
 
     user.password = await bcrypt.hash(newPassword, 12);
     await user.save();
@@ -195,8 +228,12 @@ exports.forgotPassword = async (req, res, next) => {
     user.resetPasswordExpires = Date.now() + 3600000;
     await user.save();
 
-    const resetUrl = `${req.protocol}://${req.get("host")}/api/users/reset-password/${token}`;
-    await sendEmail({ email: user.email, subject: "Password Reset", message: `You requested a password reset. Please click this link to reset your password: ${resetUrl}` });
+    const resetUrl = `${process.env.FRONTEND_URL}/reset-password.html?token=${token}`;
+    await sendEmail({
+      email: user.email,
+      subject: "Password Reset",
+      message: `You requested a password reset. Please click this link to reset your password: ${resetUrl}`,
+    });
 
     res.json({ message: "Password reset link sent to your email" });
   } catch (error) {
@@ -210,9 +247,13 @@ exports.resetPassword = async (req, res, next) => {
   const { token } = req.params;
 
   try {
-    const user = await User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } });
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
 
-    if (!user) return res.status(400).json({ error: "Invalid or expired token" });
+    if (!user)
+      return res.status(400).json({ error: "Invalid or expired token" });
 
     user.password = await bcrypt.hash(newPassword, 12);
     user.resetPasswordToken = undefined;
@@ -242,7 +283,11 @@ exports.toggle2FA = async (req, res, next) => {
       user.twoFactorEnabled = true;
       await user.save();
 
-      res.json({ message: "2FA enabled successfully. Use this secret to configure your 2FA app.", secret: secret.otpauth_url });
+      res.json({
+        message:
+          "2FA enabled successfully. Use this secret to configure your 2FA app.",
+        secret: secret.otpauth_url,
+      });
     }
   } catch (error) {
     next(error);
@@ -258,7 +303,10 @@ exports.updateProfilePicture = async (req, res) => {
     user.profilePicture = req.file.path;
     await user.save();
 
-    res.json({ message: "Profile picture updated successfully", profilePicture: user.profilePicture });
+    res.json({
+      message: "Profile picture updated successfully",
+      profilePicture: user.profilePicture,
+    });
   } catch (error) {
     console.error("Error updating profile picture:", error);
     res.status(500).json({ error: "Failed to update profile picture." });
@@ -269,9 +317,12 @@ exports.updateProfilePicture = async (req, res) => {
 exports.searchUsers = async (req, res) => {
   try {
     const { query } = req.query;
-    if (!query) return res.status(400).json({ error: "Query parameter is required" });
+    if (!query)
+      return res.status(400).json({ error: "Query parameter is required" });
 
-    const users = await User.find({ $text: { $search: query } }).select("username email profilePicture");
+    const users = await User.find({ $text: { $search: query } }).select(
+      "username email profilePicture"
+    );
 
     res.json(users);
   } catch (error) {
@@ -289,7 +340,8 @@ exports.addUser = async (req, res, next) => {
 
   try {
     const userExists = await User.findOne({ email });
-    if (userExists) return res.status(400).json({ error: "Email already registered" });
+    if (userExists)
+      return res.status(400).json({ error: "Email already registered" });
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -297,7 +349,7 @@ exports.addUser = async (req, res, next) => {
       username,
       email,
       password: hashedPassword,
-      isEmailVerified: false
+      isEmailVerified: false,
     });
 
     await newUser.save();

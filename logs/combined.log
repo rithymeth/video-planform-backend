@@ -1,0 +1,104 @@
+2024-09-14T09:48:23.945Z [32minfo[39m: Server running on port 5000
+2024-09-14T09:48:24.736Z [32minfo[39m: MongoDB connected
+2024-09-14T09:50:18.867Z [32minfo[39m: Server running on port 5000
+2024-09-14T09:50:19.551Z [32minfo[39m: MongoDB connected
+2024-09-14T09:50:21.403Z [32minfo[39m: Server running on port 5000
+2024-09-14T09:50:22.254Z [32minfo[39m: Server running on port 5000
+2024-09-14T09:50:22.873Z [32minfo[39m: MongoDB connected
+2024-09-14T09:50:28.492Z [32minfo[39m: Server running on port 5000
+2024-09-14T09:50:29.131Z [32minfo[39m: MongoDB connected
+2024-09-14T09:50:44.538Z [32minfo[39m: Server running on port 5000
+2024-09-14T09:50:45.263Z [32minfo[39m: MongoDB connected
+2024-09-14T09:52:53.372Z [32minfo[39m: Server running on port 5000
+2024-09-14T09:52:54.040Z [32minfo[39m: MongoDB connected
+2024-09-14T09:53:09.314Z [32minfo[39m: ::1 - - [14/Sep/2024:09:53:09 +0000] "POST /api/users/login HTTP/1.1" 200 237 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:53:12.627Z [32minfo[39m: ::1 - - [14/Sep/2024:09:53:12 +0000] "POST /api/users/toggle-2fa HTTP/1.1" 200 158 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:53:16.760Z [32minfo[39m: ::1 - - [14/Sep/2024:09:53:16 +0000] "POST /api/users/toggle-2fa HTTP/1.1" 200 39 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:53:19.853Z [32minfo[39m: ::1 - - [14/Sep/2024:09:53:19 +0000] "GET /api/users/profile HTTP/1.1" 200 374 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:53:34.350Z [32minfo[39m: ::1 - - [14/Sep/2024:09:53:34 +0000] "POST /api/users/change-password HTTP/1.1" 200 43 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:53:40.519Z [32minfo[39m: ::1 - - [14/Sep/2024:09:53:40 +0000] "POST /api/users/request-reset-password HTTP/1.1" 404 172 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:54:07.767Z [32minfo[39m: ::1 - - [14/Sep/2024:09:54:07 +0000] "POST /api/users/request-reset-password HTTP/1.1" 404 172 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:54:47.353Z [32minfo[39m: ::1 - - [14/Sep/2024:09:54:47 +0000] "POST /api/users/login HTTP/1.1" 200 237 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:54:58.167Z [32minfo[39m: ::1 - - [14/Sep/2024:09:54:58 +0000] "POST /api/users/change-password HTTP/1.1" 200 43 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:55:03.921Z [32minfo[39m: ::1 - - [14/Sep/2024:09:55:03 +0000] "GET /api/feed HTTP/1.1" 304 - "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:55:03.928Z [32minfo[39m: ::1 - - [14/Sep/2024:09:55:03 +0000] "GET /D:/Backend/1331-tok-api/uploads/videos/1726291227398-Warrior's%20Creed.mp4 HTTP/1.1" 404 217 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:55:07.238Z [32minfo[39m: ::1 - - [14/Sep/2024:09:55:07 +0000] "GET /api/users/search?query=methrithy HTTP/1.1" 403 25 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:55:16.273Z [32minfo[39m: ::1 - - [14/Sep/2024:09:55:16 +0000] "GET /api/users/search?query=rithy HTTP/1.1" 403 25 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:55:17.828Z [32minfo[39m: ::1 - - [14/Sep/2024:09:55:17 +0000] "GET /api/users/search?query=rithy HTTP/1.1" 403 25 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:55:20.658Z [32minfo[39m: ::1 - - [14/Sep/2024:09:55:20 +0000] "GET /api/users/search?query=rithy HTTP/1.1" 403 25 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:56:30.228Z [32minfo[39m: ::1 - - [14/Sep/2024:09:56:30 +0000] "POST /api/users/login HTTP/1.1" 200 237 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:56:36.455Z [32minfo[39m: ::1 - - [14/Sep/2024:09:56:36 +0000] "POST /api/users/request-reset-password HTTP/1.1" 404 172 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:57:15.771Z [32minfo[39m: ::1 - - [14/Sep/2024:09:57:15 +0000] "POST /api/users/login HTTP/1.1" 200 237 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:57:22.607Z [32minfo[39m: ::1 - - [14/Sep/2024:09:57:22 +0000] "POST /api/users/request-reset-password HTTP/1.1" 404 172 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:58:03.516Z [32minfo[39m: ::1 - - [14/Sep/2024:09:58:03 +0000] "POST /api/users/login HTTP/1.1" 200 237 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:58:06.903Z [32minfo[39m: ::1 - - [14/Sep/2024:09:58:06 +0000] "POST /api/users/request-reset-password HTTP/1.1" 404 172 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T09:59:46.975Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T09:59:46.975Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/forgot-password - POST - ::1
+2024-09-14T09:59:46.976Z [32minfo[39m: ::1 - - [14/Sep/2024:09:59:46 +0000] "POST /api/users/forgot-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:01:22.159Z [32minfo[39m: ::1 - - [14/Sep/2024:10:01:22 +0000] "POST /api/users/request-reset-password HTTP/1.1" 404 172 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:01:23.045Z [32minfo[39m: ::1 - - [14/Sep/2024:10:01:23 +0000] "POST /api/users/request-reset-password HTTP/1.1" 404 172 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:01:23.365Z [32minfo[39m: ::1 - - [14/Sep/2024:10:01:23 +0000] "POST /api/users/request-reset-password HTTP/1.1" 404 172 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:01:23.589Z [32minfo[39m: ::1 - - [14/Sep/2024:10:01:23 +0000] "POST /api/users/request-reset-password HTTP/1.1" 404 172 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:01:23.797Z [32minfo[39m: ::1 - - [14/Sep/2024:10:01:23 +0000] "POST /api/users/request-reset-password HTTP/1.1" 404 172 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:01:24.021Z [32minfo[39m: ::1 - - [14/Sep/2024:10:01:24 +0000] "POST /api/users/request-reset-password HTTP/1.1" 404 172 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:01:30.837Z [32minfo[39m: Server running on port 5000
+2024-09-14T10:01:31.560Z [32minfo[39m: MongoDB connected
+2024-09-14T10:01:34.310Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:01:34.311Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:01:34.312Z [32minfo[39m: ::1 - - [14/Sep/2024:10:01:34 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:01:53.030Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:01:53.030Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:01:53.031Z [32minfo[39m: ::1 - - [14/Sep/2024:10:01:53 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:41.521Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:41.522Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:41.523Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:41 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:44.592Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:44.593Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:44.594Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:44 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:44.604Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:44.605Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:44.605Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:44 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:45.318Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:45.319Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:45.319Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:45 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:45.373Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:45.373Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:45.374Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:45 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:45.677Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:45.678Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:45.678Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:45 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:46.129Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:46.130Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:46.130Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:46 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:46.346Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:46.347Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:46.347Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:46 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:46.538Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:46.538Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:46.539Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:46 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:46.598Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:46.599Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:46.599Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:46 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:46.769Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:46.769Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:46.770Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:46 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:46.775Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:46.776Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:46.776Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:46 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:46.973Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:46.974Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:46.974Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:46 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:47.595Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:47.595Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:47.596Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:47 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:02:47.802Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:02:47.802Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:02:47.803Z [32minfo[39m: ::1 - - [14/Sep/2024:10:02:47 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:05:00.025Z [32minfo[39m: Server running on port 5000
+2024-09-14T10:05:00.825Z [32minfo[39m: MongoDB connected
+2024-09-14T10:06:32.907Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:06:32.908Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:06:32.910Z [32minfo[39m: ::1 - - [14/Sep/2024:10:06:32 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-14T10:07:03.112Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
+2024-09-14T10:07:03.112Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-14T10:07:03.113Z [32minfo[39m: ::1 - - [14/Sep/2024:10:07:03 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"

@@ -139,6 +139,7 @@
       <h3>Edit User Profile</h3>
       <input type="text" id="edit-username" placeholder="New Username" />
       <input type="email" id="edit-email" placeholder="New Email" />
+      <input type="file" id="edit-profile-picture" accept="image/*" />
       <button onclick="editUserProfile()">Edit Profile</button>
       <div id="edit-profile-result" class="result"></div>
     </div>
@@ -347,14 +348,20 @@
       async function editUserProfile() {
         const newUsername = document.getElementById("edit-username").value;
         const newEmail = document.getElementById("edit-email").value;
+        const fileInput = document.getElementById("edit-profile-picture");
+        const file = fileInput.files[0];
+
+        const formData = new FormData();
+        if (newUsername) formData.append("username", newUsername);
+        if (newEmail) formData.append("email", newEmail);
+        if (file) formData.append("profilePicture", file);
 
         const response = await fetch(`${baseUrl}/users/profile`, {
           method: "PUT",
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ username: newUsername, email: newEmail }),
+          body: formData,
         });
 
         const result = await response.json();
@@ -383,14 +390,11 @@
       async function requestPasswordReset() {
         const email = document.getElementById("reset-email").value;
 
-        const response = await fetch(
-          `${baseUrl}/users/request-reset-password`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email }),
-          }
-        );
+        const response = await fetch(`${baseUrl}/users/forgot-password`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
 
         const result = await response.json();
         displayResult("reset-password-result", result);
