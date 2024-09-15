@@ -1,118 +1,118 @@
-Here's a complete list of the endpoints for our TikTok-like backend server:
+User Endpoints
+Register User
 
-User Authentication and Management:
+Method: POST
+Endpoint: /api/users/register
+Description: Register a new user.
+Verify Email
 
-POST /api/users/register - Register a new user
-POST /api/users/login - Login a user
-POST /api/users/logout - Logout a user
-GET /api/users/:id - Fetch a user's profile
-PUT /api/users/:id - Update a user's profile
-PUT /api/users/:id/password - Change user's password
-POST /api/users/forgot-password - Initiate password reset
-POST /api/users/reset-password - Reset password with token
+Method: GET
+Endpoint: /api/users/verify-email/:token
+Description: Verify a user's email using a token.
+Login User
 
+Method: POST
+Endpoint: /api/users/login
+Description: Log in a user.
+Logout User
 
-Social Interactions:
+Method: POST
+Endpoint: /api/users/logout
+Description: Log out a user. (Protected)
+Fetch User Profile
 
-POST /api/users/:id/follow - Follow a user
-POST /api/users/:id/unfollow - Unfollow a user
-GET /api/users/:id/followers - Get user's followers
-GET /api/users/:id/following - Get users followed by this user
-POST /api/users/:id/block - Block a user
-POST /api/users/:id/unblock - Unblock a user
+Method: GET
+Endpoint: /api/users/profile
+Description: Fetch the logged-in user's profile. (Protected)
+Update User Profile
 
+Method: PUT
+Endpoint: /api/users/profile
+Description: Update the logged-in user's profile. (Protected, includes image upload)
+Change Password
 
-Video Management:
+Method: POST
+Endpoint: /api/users/change-password
+Description: Change the user's password. (Protected)
+Forgot Password
 
-POST /api/videos - Upload a new video
-GET /api/videos - Fetch recent videos (for discovery)
-GET /api/users/:id/videos - Fetch all videos for a specific user
-GET /api/videos/:id - Get details of a specific video
-PUT /api/videos/:id - Update video details (title, description, etc.)
-DELETE /api/videos/:id - Delete a specific video
-POST /api/videos/:id/report - Report a video
+Method: POST
+Endpoint: /api/users/forgot-password
+Description: Initiate a password reset.
+Reset Password
 
+Method: POST
+Endpoint: /api/users/reset-password/:token
+Description: Reset the user's password using a token.
+Toggle Two-Factor Authentication (2FA)
 
-Video Interactions:
+Method: POST
+Endpoint: /api/users/toggle-2fa
+Description: Enable or disable 2FA for the logged-in user. (Protected)
+Upload Profile Picture
 
-POST /api/videos/:id/like - Like a video
-POST /api/videos/:id/unlike - Unlike a video
-POST /api/videos/:id/comment - Comment on a video
-PUT /api/videos/:id/comments/:commentId - Edit a comment
-DELETE /api/videos/:id/comments/:commentId - Delete a comment
-POST /api/videos/:id/share - Share a video
+Method: POST
+Endpoint: /api/users/upload/profile-picture
+Description: Upload a new profile picture for the user. (Protected, includes image upload)
+Search Users
 
+Method: GET
+Endpoint: /api/users/search
+Description: Search for users based on a query parameter. (Protected)
+Add User (Admin Only)
 
-Content Discovery:
+Method: POST
+Endpoint: /api/users/add
+Description: Add a new user (admin-level access). (Protected)
+Video Endpoints
+Upload Video
 
-GET /api/feed - Fetch personalized feed (videos from followed users)
-GET /api/trending - Get trending videos
-GET /api/search - Search for users and videos
-GET /api/hashtags/:tag - Get videos by hashtag
-GET /api/challenges - Get current challenges/trends
+Method: POST
+Endpoint: /api/videos/upload
+Description: Upload a new video. (Protected, includes file upload)
+Get All Videos
 
+Method: GET
+Endpoint: /api/videos/
+Description: Retrieve all videos.
+Like Video
 
-User Engagement:
+Method: PUT
+Endpoint: /api/videos/:id/like
+Description: Like a specific video. (Protected)
+Comment on Video
 
-POST /api/duets/:videoId - Create a duet with another video
-POST /api/reactions/:videoId - Add a reaction to a video
-GET /api/notifications - Get user notifications
-PUT /api/notifications/:id/read - Mark a notification as read
+Method: POST
+Endpoint: /api/videos/:id/comment
+Description: Add a comment to a specific video. (Protected)
+Stream Video
 
+Method: GET
+Endpoint: /api/videos/:id/stream
+Description: Stream a video by its ID.
+Feed Endpoints
+Get User's Feed
+Method: GET
+Endpoint: /api/feed/
+Description: Retrieve the feed for the logged-in user, including videos from the user and those they are following. (Protected)
+Notifications Endpoints
+These endpoints were not specifically mentioned in your route files, but typically for handling notifications you may consider:
 
-Analytics:
+Create Notification
 
-GET /api/users/:id/analytics - Get user's account analytics
-GET /api/videos/:id/analytics - Get video performance analytics
+Method: POST
+Endpoint: /api/notifications/create
+Description: Create a new notification for a user. (Protected)
+Get User Notifications
 
+Method: GET
+Endpoint: /api/notifications/
+Description: Retrieve all notifications for the logged-in user. (Protected)
+Building the Frontend
+To create a frontend for your application, consider these points:
 
-Monetization:
-
-POST /api/users/:id/creator-program - Apply for creator program
-GET /api/users/:id/earnings - Get user's earnings information
-POST /api/donations/:userId - Send a donation to a creator
-
-
-Content Moderation:
-
-POST /api/moderation/report - Report content for moderation
-GET /api/moderation/guidelines - Get community guidelines
-
-
-Live Streaming:
-
-POST /api/live/start - Start a live stream
-POST /api/live/end - End a live stream
-GET /api/live/active - Get currently active live streams
-POST /api/live/:id/join - Join a live stream
-POST /api/live/:id/leave - Leave a live stream
-POST /api/live/:id/comment - Comment on a live stream
-
-
-User Settings:
-
-GET /api/settings - Get user settings
-PUT /api/settings - Update user settings
-PUT /api/settings/privacy - Update privacy settings
-PUT /api/settings/notifications - Update notification preferences
-
-
-Explore:
-
-GET /api/explore/categories - Get content categories
-GET /api/explore/category/:id - Get content for a specific category
-
-
-
-This expanded API structure covers a wide range of features found in modern social media and video-sharing platforms, including:
-
-Enhanced user management and security
-Advanced social interactions
-Comprehensive video interactions
-Content discovery and exploration
-User engagement features like duets and reactions
-Analytics for users and content
-Monetization options for creators
-Content moderation tools
-Live streaming capabilities
-User settings and privacy controls
+User Registration and Login: Create forms for registering and logging in users, and handle responses from the backend to provide feedback (e.g., error messages, success notifications).
+Profile Management: Allow users to view and update their profiles, change passwords, toggle 2FA, and manage profile pictures.
+Video Management: Enable users to upload videos, view the list of all videos, like and comment on videos, and stream videos.
+Feed Display: Fetch and display the user's personalized feed, including videos from people they follow.
+Real-Time Notifications: Integrate WebSocket connections using Socket.IO to receive real-time notifications from the server.
