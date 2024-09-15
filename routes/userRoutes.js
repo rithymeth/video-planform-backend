@@ -34,6 +34,7 @@ router.post("/reset-password/:token", resetPassword);
 router.post("/toggle-2fa", protect, toggle2FA);
 router.post("/upload/profile-picture", protect, uploadImage, updateProfilePicture);
 router.get("/search", protect, searchUsers);
+router.put("/profile", protect, uploadImage, updateUserProfile);
 
 // Admin-only route to add a new user
 router.post("/add", protect, checkRole(["admin"]), addUser);

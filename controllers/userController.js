@@ -358,7 +358,40 @@ exports.addUser = async (req, res, next) => {
     next(error);
   }
 };
+exports.updateUserProfile = async (req, res, next) => {
+  const { username, email, bio, socialLinks } = req.body;
+  const profilePicture = req.file ? req.file.path : undefined;
+  const coverPhoto = req.file ? req.file.path : undefined;
 
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    // Update fields if provided
+    if (username) user.username = username;
+    if (email) user.email = email;
+    if (bio) user.bio = bio;
+    if (socialLinks) user.socialLinks = socialLinks;
+    if (profilePicture) user.profilePicture = profilePicture;
+    if (coverPhoto) user.coverPhoto = coverPhoto;
+
+    await user.save();
+
+    res.json({
+      message: "Profile updated successfully",
+      user: {
+        username: user.username,
+        email: user.email,
+        bio: user.bio,
+        socialLinks: user.socialLinks,
+        profilePicture: user.profilePicture,
+        coverPhoto: user.coverPhoto,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 // Delete Video
 exports.deleteVideo = async (req, res) => {
   try {

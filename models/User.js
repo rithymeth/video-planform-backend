@@ -17,7 +17,20 @@ const userSchema = new mongoose.Schema({
     },
     profilePicture: {
         type: String,
-        default: 'default-profile.png', // Use the correct path to your default profile image
+        default: 'default-profile.png',
+    },
+    bio: {
+        type: String,
+        maxLength: 250, // Maximum length for the bio
+    },
+    coverPhoto: {
+        type: String,
+    },
+    socialLinks: {
+        facebook: { type: String },
+        twitter: { type: String },
+        instagram: { type: String },
+        linkedin: { type: String }
     },
     following: [
         {

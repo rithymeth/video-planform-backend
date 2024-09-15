@@ -12,6 +12,8 @@ const path = require("path");
 const http = require("http");
 const { Server } = require("socket.io");
 const jwt = require("jsonwebtoken");
+const logger = require("./utils/logger"); // Import logger for logging
+const cookieParser = require("cookie-parser");
 
 dotenv.config();
 
@@ -20,22 +22,39 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: ["http://localhost:8080/"], // Update this to your production domain(s)
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
   },
 });
 
 // Middleware configuration
 app.use(express.json());
+app.use(cookieParser());
 app.use(helmet());
 app.use(cors());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Rate limiting middleware
-const limiter = rateLimit({
+// Rate limiting for general requests
+const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per window
 });
-app.use(limiter);
+app.use(generalLimiter);
+
+// Rate limiting for sensitive actions
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // Limit each IP to 5 login requests per window
+  message: "Too many login attempts from this IP, please try again after 15 minutes",
+});
+
+const passwordResetLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 3, // Limit each IP to 3 password reset requests per window
+  message: "Too many password reset requests from this IP, please try again after 15 minutes",
+});
+
+app.use("/api/users/login", loginLimiter);
+app.use("/api/users/forgot-password", passwordResetLimiter);
 
 // Routes
 app.use('/api/users', userRoutes);
@@ -61,15 +80,15 @@ io.use((socket, next) => {
 
 // WebSocket connection handler
 io.on("connection", (socket) => {
-  console.log("A user connected:", socket.id);
+  logger.info("A user connected: " + socket.id);
 
   // Automatically join the user's room based on their ID
   socket.join(socket.userId);
-  console.log(`User ${socket.userId} joined their room.`);
+  logger.info(`User ${socket.userId} joined their room.`);
 
   // Handle disconnect
   socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id);
+    logger.info("User disconnected: " + socket.id);
   });
 });
 
@@ -79,16 +98,16 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+  .then(() => logger.info("MongoDB connected"))
+  .catch((err) => logger.error("MongoDB connection error:", err));
 
 // Graceful shutdown
 process.on("SIGINT", () => {
-  console.log("Shutting down gracefully...");
+  logger.info("Shutting down gracefully...");
   server.close(() => {
-    console.log("Closed out remaining connections.");
+    logger.info("Closed out remaining connections.");
     mongoose.connection.close(false, () => {
-      console.log("MongoDB connection closed.");
+      logger.info("MongoDB connection closed.");
       process.exit(0);
     });
   });
@@ -96,7 +115,7 @@ process.on("SIGINT", () => {
 
 // Start the server
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(PORT, () => logger.info(`Server running on port ${PORT}`));
 
 // Export the io instance for use in other modules
 module.exports.io = io;
