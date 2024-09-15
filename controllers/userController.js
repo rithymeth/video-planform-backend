@@ -358,3 +358,18 @@ exports.addUser = async (req, res, next) => {
     next(error);
   }
 };
+
+// Delete Video
+exports.deleteVideo = async (req, res) => {
+  try {
+    const videoId = req.params.id;
+    // Assuming you have a Video model and are deleting by ID
+    const video = await Video.findByIdAndDelete(videoId);
+    if (!video) return res.status(404).json({ error: "Video not found" });
+
+    res.json({ message: "Video deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting video:", error);
+    res.status(500).json({ error: "Failed to delete video." });
+  }
+};

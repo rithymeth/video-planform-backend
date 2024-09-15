@@ -24,7 +24,9 @@
     }
 
     input,
-    button {
+    button,
+    select,
+    textarea {
       padding: 10px;
       margin: 5px 0;
       width: calc(100% - 22px);
@@ -77,9 +79,52 @@
     .media-item h4 {
       margin: 0 0 10px 0;
     }
+
+    .notification-icon {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .notification-dropdown {
+      position: absolute;
+      right: 0;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      max-height: 400px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .notification-dropdown ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .notification-dropdown ul li {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .notification-dropdown ul li:last-child {
+      border-bottom: none;
+    }
   </style>
 </head>
 <body>
+  <!-- Notification Bell -->
+  <div class="notification-icon">
+    <span id="notification-bell" onclick="toggleNotifications()">🔔</span>
+    <div id="notification-dropdown" class="notification-dropdown">
+      <h4>Notifications</h4>
+      <ul id="notification-list"></ul>
+    </div>
+  </div>
+
   <!-- Register User Section -->
   <div class="section">
     <h3>Register User</h3>
@@ -176,12 +221,20 @@
   <div class="section">
     <h3>Search Users</h3>
     <input type="text" id="search-query" placeholder="Search Query">
+    <select id="search-sort">
+      <option value="createdAt">Date</option>
+      <option value="likes">Likes</option>
+    </select>
+    <select id="search-order">
+      <option value="desc">Descending</option>
+      <option value="asc">Ascending</option>
+    </select>
     <button onclick="searchUsers()">Search Users</button>
     <div id="search-results" class="result"></div>
   </div>
 
   <!-- Add User Section (Admin Only) -->
-  <div class="section">
+  <div class="section admin-only">
     <h3>Add User (Admin Only)</h3>
     <input type="text" id="add-username" placeholder="Username">
     <input type="email" id="add-email" placeholder="Email">
@@ -241,43 +294,56 @@
     <div id="media-feed" class="media-feed"></div>
   </div>
 
+  <!-- Share and Embed Video Section -->
+  <div class="section">
+    <h3>Share and Embed Video</h3>
+    <input type="text" id="embed-video-id" placeholder="Video ID">
+    <button onclick="getEmbedCode()">Get Embed Code</button>
+    <div id="embed-code-result" class="result"></div>
+    <button onclick="copyEmbedCode()">Copy Embed Code</button>
+  </div>
+
+  <!-- Video Analytics Section -->
+  <div class="section">
+    <h3>Video Analytics</h3>
+    <input type="text" id="analytics-video-id" placeholder="Video ID">
+    <button onclick="getVideoAnalytics()">Get Analytics</button>
+    <div id="video-analytics-result" class="result"></div>
+  </div>
+
   <script>
     const baseUrl = "http://localhost:5000/api";
     let token = "";
 
+    // Initialize Socket.io
+    const socket = io("http://localhost:5000", {
+      auth: {
+        token: token, // Send token for WebSocket authentication
+      },
+    });
+
+    // Listen for real-time notifications
+    socket.on('newNotification', (notification) => {
+      addNotification(notification);
+    });
+
+    // Function to display new notifications
+    function addNotification(notification) {
+      const notificationList = document.getElementById('notification-list');
+      const notificationItem = document.createElement('li');
+      notificationItem.textContent = `${notification.fromUser.username}: ${notification.content}`;
+      notificationList.appendChild(notificationItem);
+    }
+
+    // Function to toggle notification dropdown
+    function toggleNotifications() {
+      const dropdown = document.getElementById('notification-dropdown');
+      dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+
     // Helper function to display results
     function displayResult(elementId, result) {
       document.getElementById(elementId).textContent = JSON.stringify(result, null, 2);
-    }
-
-    // Helper function to display media feed
-    function displayFeed(mediaItems) {
-      const feedContainer = document.getElementById("media-feed");
-      feedContainer.innerHTML = ""; // Clear previous content
-
-      if (!Array.isArray(mediaItems)) {
-        displayResult("feed-result", {
-          error: "Media items is not an array",
-        });
-        return;
-      }
-
-      mediaItems.forEach((item) => {
-        const mediaElement = document.createElement("div");
-        mediaElement.className = "media-item";
-
-        mediaElement.innerHTML = `
-          <h4>${item.title}</h4>
-          <p>${item.description}</p>
-          <video controls>
-            <source src="${item.videoUrl}" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <p>Uploaded by: ${item.user?.username || "Unknown"}</p>
-        `;
-
-        feedContainer.appendChild(mediaElement);
-      });
     }
 
     // Register User
@@ -328,6 +394,7 @@
         token = result.token; // Store token for authenticated requests
         displayResult("login-result", result);
         document.getElementById("two-fa-section").style.display = "block";
+        updateUIForRole(result.role); // Update UI for the user's role
       } else {
         displayResult("login-result", result);
       }
@@ -473,8 +540,10 @@
     // Search Users
     async function searchUsers() {
       const query = document.getElementById("search-query").value;
+      const sortBy = document.getElementById("search-sort").value;
+      const order = document.getElementById("search-order").value;
 
-      const response = await fetch(`${baseUrl}/users/search?query=${query}`, {
+      const response = await fetch(`${baseUrl}/users/search?query=${query}&sortBy=${sortBy}&order=${order}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -588,7 +657,7 @@
       }
     }
 
-    // Get Feed Function
+    // Get Media Feed
     async function getFeed() {
       const response = await fetch(`${baseUrl}/feed/`, {
         method: "GET",
@@ -613,7 +682,7 @@
       }
     }
 
-    // Utility function to display media feed
+    // Display Media Feed
     function displayFeed(mediaItems) {
       const feedContainer = document.getElementById("media-feed");
       feedContainer.innerHTML = ""; // Clear previous content
@@ -643,10 +712,59 @@
       });
     }
 
-    // Display Result Function
-    function displayResult(elementId, result) {
-      const resultElement = document.getElementById(elementId);
-      resultElement.innerHTML = JSON.stringify(result, null, 2);
+    // Get Embed Code
+    async function getEmbedCode() {
+      const videoId = document.getElementById("embed-video-id").value;
+
+      const response = await fetch(`${baseUrl}/videos/${videoId}/embed`, {
+        method: "GET",
+      });
+
+      const result = await response.json();
+      displayResult("embed-code-result", result.embedCode);
+    }
+
+    // Copy Embed Code to Clipboard
+    function copyEmbedCode() {
+      const embedCode = document.getElementById("embed-code-result").textContent;
+      navigator.clipboard.writeText(embedCode).then(() => {
+        alert('Embed code copied to clipboard!');
+      }).catch(err => {
+        console.error('Failed to copy embed code:', err);
+      });
+    }
+
+    // Fetch Video Analytics
+    async function getVideoAnalytics() {
+      const videoId = document.getElementById("analytics-video-id").value;
+
+      const response = await fetch(`${baseUrl}/videos/${videoId}/analytics`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const result = await response.json();
+      displayResult("video-analytics-result", result);
+    }
+
+    // Update UI Based on Role
+    function updateUIForRole(role) {
+      const adminOnlySections = document.querySelectorAll('.admin-only');
+      const moderatorSections = document.querySelectorAll('.moderator-only');
+
+      if (role === 'admin') {
+        adminOnlySections.forEach(section => section.style.display = 'block');
+        moderatorSections.forEach(section => section.style.display = 'block');
+      } else if (role === 'moderator') {
+        adminOnlySections.forEach(section => section.style.display = 'none');
+        moderatorSections.forEach(section => section.style.display = 'block');
+      } else {
+        adminOnlySections.forEach(section => section.style.display = 'none');
+        moderatorSections.forEach(section => section.style.display = 'none');
+      }
     }
   </script>
 </body>

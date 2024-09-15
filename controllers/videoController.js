@@ -1,31 +1,47 @@
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
-const Video = require("../models/Video"); // Mongoose model for videos
-const Comment = require("../models/Comment"); // Mongoose model for comments
+const Video = require("../models/Video");
+const Comment = require("../models/Comment");
+const ffmpeg = require('fluent-ffmpeg');
 
-// Helper function to ensure the directory exists
+// Helper to generate a thumbnail
+const generateThumbnail = (videoPath, thumbnailPath) => {
+  return new Promise((resolve, reject) => {
+    ffmpeg(videoPath)
+      .screenshots({
+        count: 1,
+        folder: thumbnailPath,
+        size: "320x240",
+        filename: "thumbnail.png",
+      })
+      .on("end", resolve)
+      .on("error", reject);
+  });
+};
+
+// Helper to ensure directory exists
 const ensureDirExists = (dir) => {
   if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true }); // Creates the directory and any necessary subdirectories
+    fs.mkdirSync(dir, { recursive: true });
   }
 };
 
 // Configure multer for video uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const dir = path.join(__dirname, "../uploads/videos"); // Set the folder for storing uploaded videos
-    ensureDirExists(dir); // Ensure the directory exists before storing files
+    const dir = path.join(__dirname, "../uploads/videos");
+    ensureDirExists(dir);
     cb(null, dir);
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`); // Rename the file to prevent conflicts
+    cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
 
 const upload = multer({
   storage,
-  limits: { fileSize: 500 * 1024 * 1024 }, // Set file size limit to 500 MB
+  limits: { fileSize: 500 * 1024 * 1024 }, // 500 MB limit
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();
     if (![".mp4", ".mov", ".avi"].includes(ext)) {
@@ -35,7 +51,6 @@ const upload = multer({
   },
 });
 
-// Middleware to handle video uploads
 const uploadVideoFile = upload.single("video");
 
 // Upload Video Controller
@@ -46,22 +61,27 @@ const uploadVideo = async (req, res) => {
       return res.status(400).json({ error: "No video file uploaded" });
     }
 
-    // Save only the relative path
     const videoUrl = `uploads/videos/${req.file.filename}`;
+    const thumbnailPath = path.join(__dirname, "../uploads/thumbnails");
+    ensureDirExists(thumbnailPath);
 
-    // Save video metadata to the database
+    await generateThumbnail(req.file.path, thumbnailPath);
+
     const newVideo = new Video({
       user: req.user.id,
       title,
       description,
-      videoUrl, // Save relative path only
+      videoUrl,
+      thumbnailUrl: `uploads/thumbnails/thumbnail.png`,
     });
 
     await newVideo.save();
     res.status(201).json({ message: "Video uploaded successfully", videoUrl });
   } catch (error) {
     console.error("Error during video upload:", error);
-    res.status(500).json({ error: "Failed to upload video. Please try again." });
+    res
+      .status(500)
+      .json({ error: "Failed to upload video. Please try again." });
   }
 };
 
@@ -72,7 +92,7 @@ const streamVideo = async (req, res) => {
 
     if (!video) return res.status(404).json({ error: "Video not found" });
 
-    const videoPath = path.join(__dirname, '..', video.videoUrl);
+    const videoPath = path.join(__dirname, "..", video.videoUrl);
     const stat = fs.statSync(videoPath);
     const fileSize = stat.size;
     const range = req.headers.range;
@@ -84,17 +104,17 @@ const streamVideo = async (req, res) => {
       const chunksize = end - start + 1;
       const file = fs.createReadStream(videoPath, { start, end });
       const head = {
-        'Content-Range': `bytes ${start}-${end}/${fileSize}`,
-        'Accept-Ranges': 'bytes',
-        'Content-Length': chunksize,
-        'Content-Type': 'video/mp4', // Adjust this based on your video type
+        "Content-Range": `bytes ${start}-${end}/${fileSize}`,
+        "Accept-Ranges": "bytes",
+        "Content-Length": chunksize,
+        "Content-Type": "video/mp4",
       };
       res.writeHead(206, head);
       file.pipe(res);
     } else {
       const head = {
-        'Content-Length': fileSize,
-        'Content-Type': 'video/mp4', // Adjust this based on your video type
+        "Content-Length": fileSize,
+        "Content-Type": "video/mp4",
       };
       res.writeHead(200, head);
       fs.createReadStream(videoPath).pipe(res);
@@ -105,12 +125,47 @@ const streamVideo = async (req, res) => {
   }
 };
 
+// Generate Embeddable Link
+exports.getEmbedCode = (req, res) => {
+  const videoId = req.params.id;
+  const embedCode = `<iframe width="560" height="315" src="${process.env.FRONTEND_URL}/videos/${videoId}/embed" frameborder="0" allowfullscreen></iframe>`;
+  res.json({ embedCode });
+};
+
+// Get Video Analytics
+exports.getVideoAnalytics = async (req, res) => {
+  try {
+    const videoId = req.params.id;
+    const video = await Video.findById(videoId)
+      .populate("user", "username")
+      .populate("comments");
+
+    if (!video) return res.status(404).json({ error: "Video not found" });
+
+    const analyticsData = {
+      views: video.views,
+      likes: video.likes.length,
+      comments: video.comments.length,
+    };
+
+    res.json(analyticsData);
+  } catch (error) {
+    console.error("Error fetching video analytics:", error);
+    res.status(500).json({ error: "Failed to fetch video analytics." });
+  }
+};
+
 // Get Videos Controller
 const getVideos = async (req, res) => {
   try {
-    const videos = await Video.find()
+    const { sortBy, order = "desc", search } = req.query;
+    const query = search ? { title: new RegExp(search, "i") } : {};
+
+    const videos = await Video.find(query)
+      .sort({ [sortBy || "createdAt"]: order })
       .populate("user", "username")
       .populate("comments");
+
     res.json({ videos });
   } catch (error) {
     console.error("Error fetching videos:", error);
@@ -161,7 +216,9 @@ const commentOnVideo = async (req, res) => {
     video.comments.push(newComment._id);
     await video.save();
 
-    res.status(201).json({ message: "Comment added successfully", comment: newComment });
+    res
+      .status(201)
+      .json({ message: "Comment added successfully", comment: newComment });
   } catch (error) {
     console.error("Error commenting on video:", error);
     res.status(500).json({ error: "Failed to add comment." });

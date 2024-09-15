@@ -38,7 +38,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Routes
-app.use("/api/users", userRoutes);
+app.use('/api/users', userRoutes);
 app.use("/api/videos", videoRoutes);
 app.use("/api/feed", feedRoutes);
 
