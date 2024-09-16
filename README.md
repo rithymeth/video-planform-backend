@@ -20,7 +20,7 @@ Welcome to the Video Platform Backend API! This API allows you to build and inte
 To get started, clone the repository and install the dependencies:
 
 \`\`\`bash
-git clone https://github.com/yourusername/video-platform-backend.git
+git clone https://github.com/rithymeth/video-planform-backend.git
 cd video-platform-backend
 npm install
 \`\`\`
