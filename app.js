@@ -76,6 +76,24 @@ const passwordResetLimiter = rateLimit({
 app.use("/api/users/login", loginLimiter);
 app.use("/api/users/forgot-password", passwordResetLimiter);
 
+// Health Check Endpoint
+app.get("/health", (req, res) => {
+  const redisStatus =
+    redisClient.status === "ready" ? "connected" : "disconnected";
+  const mongoStatus =
+    mongoose.connection.readyState === 1 ? "connected" : "disconnected";
+
+  res.json({
+    status: "ok",
+    uptime: process.uptime(),
+    timestamp: Date.now(),
+    services: {
+      redis: redisStatus,
+      mongoDB: mongoStatus,
+    },
+  });
+});
+
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
@@ -101,6 +119,12 @@ io.use((socket, next) => {
 // WebSocket connection handler
 io.on("connection", (socket) => {
   console.log("A user connected");
+
+  // Real-time notification system example
+  socket.on("likeVideo", (data) => {
+    io.emit("notification", { message: `User liked a video: ${data.videoId}` });
+  });
+
   socket.on("disconnect", () => {
     console.log("User disconnected");
   });
