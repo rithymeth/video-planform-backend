@@ -54,7 +54,7 @@ const upload = multer({
 const uploadVideoFile = upload.single("video");
 
 // Upload Video Controller
-const uploadVideo = async (req, res) => {
+const uploadVideo = async (req, res, next) => {
   try {
     const { title, description } = req.body;
     if (!req.file) {
@@ -79,14 +79,12 @@ const uploadVideo = async (req, res) => {
     res.status(201).json({ message: "Video uploaded successfully", videoUrl });
   } catch (error) {
     console.error("Error during video upload:", error);
-    res
-      .status(500)
-      .json({ error: "Failed to upload video. Please try again." });
+    next(error); // Pass error to error middleware
   }
 };
 
 // Stream Video Controller
-const streamVideo = async (req, res) => {
+const streamVideo = async (req, res, next) => {
   try {
     const video = await Video.findById(req.params.id);
 
@@ -121,7 +119,7 @@ const streamVideo = async (req, res) => {
     }
   } catch (error) {
     console.error("Error streaming video:", error);
-    res.status(500).json({ error: "Failed to stream video." });
+    next(error); // Pass error to error middleware
   }
 };
 
@@ -133,7 +131,7 @@ const getEmbedCode = (req, res) => {
 };
 
 // Get Video Analytics
-const getVideoAnalytics = async (req, res) => {
+const getVideoAnalytics = async (req, res, next) => {
   try {
     const videoId = req.params.id;
     const video = await Video.findById(videoId)
@@ -151,12 +149,12 @@ const getVideoAnalytics = async (req, res) => {
     res.json(analyticsData);
   } catch (error) {
     console.error("Error fetching video analytics:", error);
-    res.status(500).json({ error: "Failed to fetch video analytics." });
+    next(error); // Pass error to error middleware
   }
 };
 
 // Get Videos Controller
-const getVideos = async (req, res) => {
+const getVideos = async (req, res, next) => {
   try {
     const { sortBy, order = "desc", search } = req.query;
     const query = search ? { title: new RegExp(search, "i") } : {};
@@ -169,12 +167,12 @@ const getVideos = async (req, res) => {
     res.json({ videos });
   } catch (error) {
     console.error("Error fetching videos:", error);
-    res.status(500).json({ error: "Failed to fetch videos." });
+    next(error); // Pass error to error middleware
   }
 };
 
 // Like Video Controller
-const likeVideo = async (req, res) => {
+const likeVideo = async (req, res, next) => {
   try {
     const video = await Video.findById(req.params.id);
 
@@ -193,12 +191,12 @@ const likeVideo = async (req, res) => {
     });
   } catch (error) {
     console.error("Error liking video:", error);
-    res.status(500).json({ error: "Failed to like video." });
+    next(error); // Pass error to error middleware
   }
 };
 
 // Comment on Video Controller
-const commentOnVideo = async (req, res) => {
+const commentOnVideo = async (req, res, next) => {
   try {
     const { text } = req.body;
 
@@ -221,12 +219,12 @@ const commentOnVideo = async (req, res) => {
       .json({ message: "Comment added successfully", comment: newComment });
   } catch (error) {
     console.error("Error commenting on video:", error);
-    res.status(500).json({ error: "Failed to add comment." });
+    next(error); // Pass error to error middleware
   }
 };
 
 // Delete Video Controller
-const deleteVideo = async (req, res) => {
+const deleteVideo = async (req, res, next) => {
   try {
     const video = await Video.findById(req.params.id);
 
@@ -246,7 +244,7 @@ const deleteVideo = async (req, res) => {
     res.json({ message: "Video deleted successfully" });
   } catch (error) {
     console.error("Error deleting video:", error);
-    res.status(500).json({ error: "Failed to delete video." });
+    next(error); // Pass error to error middleware
   }
 };
 
