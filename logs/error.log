@@ -56,3 +56,8 @@
 2024-09-16T05:46:38.374Z [31merror[39m: MongoDB connection error: option poolsize is not supported
 2024-09-16T05:46:49.120Z [31merror[39m: MongoDB connection error: option poolsize is not supported
 2024-09-16T06:43:19.688Z [31merror[39m: POST /api/videos/upload - Only video files are allowed
+2024-09-16T06:59:07.198Z [31merror[39m: POST /api/users/upload/profile-picture - Cannot set headers after they are sent to the client
+2024-09-16T06:59:43.045Z [31merror[39m: POST /api/users/add - Cannot set headers after they are sent to the client
+2024-09-16T07:01:13.597Z [31merror[39m: POST /api/users/add - Cannot set headers after they are sent to the client
+2024-09-16T07:01:14.796Z [31merror[39m: POST /api/users/add - Cannot set headers after they are sent to the client
+2024-09-16T07:02:07.765Z [31merror[39m: POST /api/users/add - Cannot set headers after they are sent to the client

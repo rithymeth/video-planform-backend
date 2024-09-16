@@ -441,16 +441,26 @@
         formData.append("username", username);
         formData.append("email", email);
         if (profilePicture) {
-          formData.append("profilePicture", profilePicture);
+          formData.append("profilePicture", profilePicture); // Make sure this matches the backend field name
         }
 
         const response = await fetch(`${baseUrl}/users/profile`, {
           method: "PUT",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`, // Ensure the token is sent here
           },
           body: formData,
         });
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            alert("Session expired. Please log in again.");
+            // Optionally, redirect to the login page
+          }
+          const result = await response.json();
+          displayResult("update-profile-result", result);
+          return;
+        }
 
         const result = await response.json();
         displayResult("update-profile-result", result);

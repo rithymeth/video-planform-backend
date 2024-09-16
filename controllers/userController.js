@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const Joi = require("joi");
 const User = require("../models/User");
-const Video = require("../models/Video"); // Assuming you have a Video model
+const Video = require("../models/Video");
 const sendEmail = require("../utils/emailService");
 const speakeasy = require("speakeasy");
 
@@ -167,7 +167,7 @@ exports.fetchUserProfile = async (req, res, next) => {
 // Update User Profile
 exports.updateUserProfile = async (req, res, next) => {
   const { username, email, bio, socialLinks } = req.body;
-  const profilePicture = req.file ? req.file.path : undefined; // Check if a file is uploaded
+  const profilePicture = req.file ? req.file.path : undefined;
   const coverPhoto = req.file ? req.file.path : undefined;
 
   try {
@@ -231,7 +231,7 @@ exports.forgotPassword = async (req, res, next) => {
 
     const token = crypto.randomBytes(20).toString("hex");
     user.resetPasswordToken = token;
-    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour expiration
+    user.resetPasswordExpires = Date.now() + 3600000;
     await user.save();
 
     const resetUrl = `${process.env.FRONTEND_URL}/reset-password.html?token=${token}`;
@@ -337,7 +337,7 @@ exports.searchUsers = async (req, res) => {
   }
 };
 
-// Add User (Admin Only)
+// Add User
 exports.addUser = async (req, res, next) => {
   const { username, email, password } = req.body;
 
