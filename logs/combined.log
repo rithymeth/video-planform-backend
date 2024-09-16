@@ -400,3 +400,28 @@
 {"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T07:21:17.185Z"}
 {"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T07:21:17.842Z"}
 {"level":"info","message":"Shutting down gracefully...","timestamp":"2024-09-16T07:21:20.077Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T07:21:22.015Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T07:21:22.606Z"}
+{"level":"error","message":"GET /api/feed/ - Cannot set headers after they are sent to the client","timestamp":"2024-09-16T07:23:55.980Z"}
+{"level":"error","message":"GET /api/feed/ - Cannot set headers after they are sent to the client","timestamp":"2024-09-16T07:23:56.867Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T07:30:56.611Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T07:30:57.363Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T07:31:04.516Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T07:31:05.159Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T07:31:08.740Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T07:31:10.012Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T07:31:10.637Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T07:31:16.188Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T07:31:16.792Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T07:31:20.933Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T07:31:21.556Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T07:53:31.311Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T07:53:31.985Z"}
+{"level":"info","message":"Shutting down gracefully...","timestamp":"2024-09-16T07:53:58.123Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T07:54:01.108Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T07:54:01.800Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T07:55:00.145Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T07:55:00.819Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T07:55:05.017Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T07:55:05.637Z"}
+{"level":"info","message":"Shutting down gracefully...","timestamp":"2024-09-16T07:58:21.006Z"}

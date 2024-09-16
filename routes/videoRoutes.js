@@ -9,10 +9,9 @@ const {
   deleteVideo,
   getEmbedCode,
   getVideoAnalytics,
-} = require("../controllers/videoController");
-
-// Correctly import both middleware functions
-const { protect, checkRole } = require("../middleware/roleMiddleware");
+} = require("../controllers/videoController"); // Correctly import all functions from videoController
+const protect = require("../middleware/authMiddleware");
+const checkRole = require("../middleware/roleMiddleware");
 
 const router = express.Router();
 
@@ -31,8 +30,6 @@ router.put("/:id/like", protect, likeVideo);
 router.post("/:id/comment", protect, commentOnVideo);
 router.get("/:id/stream", streamVideo);
 router.get("/:id/analytics", protect, getVideoAnalytics);
-
-// Apply role check middleware correctly
 router.delete("/:id", protect, checkRole(["admin", "moderator"]), deleteVideo);
 router.get("/:id/embed", getEmbedCode);
 

@@ -1,20 +1,75 @@
 const Video = require("../models/Video");
 const User = require("../models/User");
 
-// Get analytics for admin
-exports.getAnalytics = async (req, res) => {
+// Get analytics for a specific video
+exports.getVideoAnalytics = async (req, res, next) => {
   try {
-    const mostLikedVideos = await Video.find().sort({ likes: -1 }).limit(5);
-    const mostActiveUsers = await User.find()
-      .sort({ activityScore: -1 })
-      .limit(5);
+    const videoId = req.params.id;
+    const video = await Video.findById(videoId);
 
-    res.json({
-      mostLikedVideos,
-      mostActiveUsers,
-    });
+    if (!video) {
+      return res.status(404).json({ error: "Video not found" });
+    }
+
+    // Perform necessary calculations for analytics
+    const analytics = {
+      views: video.views,
+      likes: video.likes,
+      comments: video.comments.length,
+      // Add any other analytics you want to provide
+    };
+
+    res.json(analytics);
   } catch (error) {
-    console.error("Error fetching analytics:", error);
-    res.status(500).json({ error: "Internal server error" });
+    next(error);
+  }
+};
+
+// Get analytics for a specific user
+exports.getUserAnalytics = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Perform necessary calculations for analytics
+    const analytics = {
+      uploadedVideos: user.uploadedVideos.length,
+      totalViews: user.uploadedVideos.reduce(
+        (acc, video) => acc + video.views,
+        0
+      ),
+      // Add any other analytics you want to provide
+    };
+
+    res.json(analytics);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Get overall platform analytics
+exports.getPlatformAnalytics = async (req, res, next) => {
+  try {
+    // Perform necessary calculations for platform-wide analytics
+    const totalUsers = await User.countDocuments();
+    const totalVideos = await Video.countDocuments();
+    const totalViews = await Video.aggregate([
+      { $group: { _id: null, totalViews: { $sum: "$views" } } },
+    ]);
+
+    const analytics = {
+      totalUsers,
+      totalVideos,
+      totalViews: totalViews[0]?.totalViews || 0,
+      // Add any other analytics you want to provide
+    };
+
+    res.json(analytics);
+  } catch (error) {
+    next(error);
   }
 };

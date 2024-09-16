@@ -14,19 +14,16 @@ const {
   searchUsers,
   addUser,
   deleteVideo,
-} = require("../controllers/userController"); // Ensure the path is correct and all functions are imported
-
-const { protect, checkRole } = require("../middleware/roleMiddleware"); // Correctly destructure both middleware functions
+} = require("../controllers/userController");
+const protect = require("../middleware/authMiddleware");
 const uploadImage = require("../middleware/uploadMiddleware");
+const checkPermission = require("../middleware/permissionsMiddleware");
 
 const router = express.Router();
 
-// Public Routes
 router.post("/register", registerUser);
 router.get("/verify-email/:token", verifyEmail);
 router.post("/login", loginUser);
-
-// Protected Routes
 router.post("/logout", protect, logoutUser);
 router.get("/profile", protect, fetchUserProfile);
 router.put("/profile", protect, uploadImage, updateUserProfile);
@@ -42,9 +39,13 @@ router.post(
 );
 router.get("/search", protect, searchUsers);
 
-// Admin and Moderator-only Routes
-router.post("/add", protect, checkRole(["admin"]), addUser);
-router.delete("/:id", protect, checkRole(["admin", "moderator"]), deleteVideo);
+// Admin-only routes
+router.post("/add", protect, checkPermission(["admin:addUser"]), addUser);
+router.delete(
+  "/:id",
+  protect,
+  checkPermission(["admin:deleteVideo"]),
+  deleteVideo
+);
 
-// Export the router
 module.exports = router;

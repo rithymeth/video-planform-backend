@@ -1,9 +1,9 @@
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const ffmpeg = require("fluent-ffmpeg");
 const Video = require("../models/Video");
 const Comment = require("../models/Comment");
-const ffmpeg = require('fluent-ffmpeg');
 
 // Helper to generate a thumbnail
 const generateThumbnail = (videoPath, thumbnailPath) => {
@@ -126,14 +126,14 @@ const streamVideo = async (req, res) => {
 };
 
 // Generate Embeddable Link
-exports.getEmbedCode = (req, res) => {
+const getEmbedCode = (req, res) => {
   const videoId = req.params.id;
   const embedCode = `<iframe width="560" height="315" src="${process.env.FRONTEND_URL}/videos/${videoId}/embed" frameborder="0" allowfullscreen></iframe>`;
   res.json({ embedCode });
 };
 
 // Get Video Analytics
-exports.getVideoAnalytics = async (req, res) => {
+const getVideoAnalytics = async (req, res) => {
   try {
     const videoId = req.params.id;
     const video = await Video.findById(videoId)
@@ -250,7 +250,7 @@ const deleteVideo = async (req, res) => {
   }
 };
 
-// Export the upload middleware and controllers
+// Export all controllers
 exports.uploadVideoFile = uploadVideoFile;
 exports.uploadVideo = uploadVideo;
 exports.streamVideo = streamVideo;
@@ -258,3 +258,5 @@ exports.getVideos = getVideos;
 exports.likeVideo = likeVideo;
 exports.commentOnVideo = commentOnVideo;
 exports.deleteVideo = deleteVideo;
+exports.getEmbedCode = getEmbedCode;
+exports.getVideoAnalytics = getVideoAnalytics;

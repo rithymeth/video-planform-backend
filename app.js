@@ -4,7 +4,11 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
 const videoRoutes = require("./routes/videoRoutes");
 const feedRoutes = require("./routes/feedRoutes");
+const searchRoutes = require("./routes/searchRoutes");
+const moderationRoutes = require("./routes/moderationRoutes");
+const analyticsRoutes = require("./routes/analyticsRoutes");
 const errorMiddleware = require("./middleware/errorMiddleware");
+const monitoringMiddleware = require("./middleware/monitoringMiddleware");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const cors = require("cors");
@@ -18,6 +22,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const Redis = require("ioredis");
 const redisClient = new Redis(); // Redis client for caching
+const { connectRabbitMQ } = require("./utils/rabbitMQ");
 
 dotenv.config();
 
@@ -56,7 +61,7 @@ const swaggerOptions = {
   apis: ["./routes/*.js"],
 };
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Ensure correct middleware setup
 
 // Rate limiting
 const generalLimiter = rateLimit({
@@ -98,9 +103,15 @@ app.get("/health", (req, res) => {
 app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
 app.use("/api/feed", feedRoutes);
+app.use("/api/search", searchRoutes);
+app.use("/api/moderate", moderationRoutes);
+app.use("/api/analytics", analyticsRoutes);
+
+// Monitoring Endpoint
+app.get("/metrics", monitoringMiddleware); // Correct usage of middleware function
 
 // Error handling middleware
-app.use(errorMiddleware);
+app.use(errorMiddleware); // Correct usage of the error handling middleware
 
 // WebSocket Authentication Middleware
 io.use((socket, next) => {
@@ -119,11 +130,6 @@ io.use((socket, next) => {
 // WebSocket connection handler
 io.on("connection", (socket) => {
   console.log("A user connected");
-
-  // Real-time notification system example
-  socket.on("likeVideo", (data) => {
-    io.emit("notification", { message: `User liked a video: ${data.videoId}` });
-  });
 
   socket.on("disconnect", () => {
     console.log("User disconnected");
@@ -144,6 +150,9 @@ mongoose
   })
   .then(() => logger.info("MongoDB connected"))
   .catch((err) => logger.error("MongoDB connection error:", err));
+
+// Connect to RabbitMQ
+connectRabbitMQ();
 
 // Graceful shutdown
 process.on("SIGINT", () => {
