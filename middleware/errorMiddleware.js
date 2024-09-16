@@ -1,9 +1,10 @@
-const errorHandler = (err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({
-        success: false,
-        message: err.message || 'Server Error',
-    });
+const logger = require("../utils/logger");
+
+const errorMiddleware = (err, req, res, next) => {
+  logger.error(`${req.method} ${req.url} - ${err.message}`);
+  res.status(500).json({
+    message: err.message || "Server Error",
+  });
 };
 
-module.exports = errorHandler;
+module.exports = errorMiddleware;

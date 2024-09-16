@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const Joi = require("joi");
 const User = require("../models/User");
+const Video = require("../models/Video"); // Assuming you have a Video model
 const sendEmail = require("../utils/emailService");
 const speakeasy = require("speakeasy");
 
@@ -165,19 +166,21 @@ exports.fetchUserProfile = async (req, res, next) => {
 
 // Update User Profile
 exports.updateUserProfile = async (req, res, next) => {
-  const { username, email } = req.body;
+  const { username, email, bio, socialLinks } = req.body;
   const profilePicture = req.file ? req.file.path : undefined; // Check if a file is uploaded
+  const coverPhoto = req.file ? req.file.path : undefined;
 
   try {
     const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ error: "User not found" });
 
-    // Update username and email if provided
+    // Update fields if provided
     if (username) user.username = username;
     if (email) user.email = email;
-
-    // Update profile picture if a new one is uploaded
+    if (bio) user.bio = bio;
+    if (socialLinks) user.socialLinks = socialLinks;
     if (profilePicture) user.profilePicture = profilePicture;
+    if (coverPhoto) user.coverPhoto = coverPhoto;
 
     await user.save();
 
@@ -186,7 +189,10 @@ exports.updateUserProfile = async (req, res, next) => {
       user: {
         username: user.username,
         email: user.email,
-        profilePicture: user.profilePicture, // Include the updated profile picture URL
+        bio: user.bio,
+        socialLinks: user.socialLinks,
+        profilePicture: user.profilePicture,
+        coverPhoto: user.coverPhoto,
       },
     });
   } catch (error) {
@@ -225,7 +231,7 @@ exports.forgotPassword = async (req, res, next) => {
 
     const token = crypto.randomBytes(20).toString("hex");
     user.resetPasswordToken = token;
-    user.resetPasswordExpires = Date.now() + 3600000;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour expiration
     await user.save();
 
     const resetUrl = `${process.env.FRONTEND_URL}/reset-password.html?token=${token}`;
@@ -331,7 +337,7 @@ exports.searchUsers = async (req, res) => {
   }
 };
 
-// Add User
+// Add User (Admin Only)
 exports.addUser = async (req, res, next) => {
   const { username, email, password } = req.body;
 
@@ -358,45 +364,11 @@ exports.addUser = async (req, res, next) => {
     next(error);
   }
 };
-exports.updateUserProfile = async (req, res, next) => {
-  const { username, email, bio, socialLinks } = req.body;
-  const profilePicture = req.file ? req.file.path : undefined;
-  const coverPhoto = req.file ? req.file.path : undefined;
 
-  try {
-    const user = await User.findById(req.user.id);
-    if (!user) return res.status(404).json({ error: "User not found" });
-
-    // Update fields if provided
-    if (username) user.username = username;
-    if (email) user.email = email;
-    if (bio) user.bio = bio;
-    if (socialLinks) user.socialLinks = socialLinks;
-    if (profilePicture) user.profilePicture = profilePicture;
-    if (coverPhoto) user.coverPhoto = coverPhoto;
-
-    await user.save();
-
-    res.json({
-      message: "Profile updated successfully",
-      user: {
-        username: user.username,
-        email: user.email,
-        bio: user.bio,
-        socialLinks: user.socialLinks,
-        profilePicture: user.profilePicture,
-        coverPhoto: user.coverPhoto,
-      },
-    });
-  } catch (error) {
-    next(error);
-  }
-};
 // Delete Video
 exports.deleteVideo = async (req, res) => {
   try {
     const videoId = req.params.id;
-    // Assuming you have a Video model and are deleting by ID
     const video = await Video.findByIdAndDelete(videoId);
     if (!video) return res.status(404).json({ error: "Video not found" });
 

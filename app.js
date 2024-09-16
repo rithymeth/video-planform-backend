@@ -12,8 +12,12 @@ const path = require("path");
 const http = require("http");
 const { Server } = require("socket.io");
 const jwt = require("jsonwebtoken");
-const logger = require("./utils/logger"); // Import logger for logging
+const logger = require("./utils/logger");
 const cookieParser = require("cookie-parser");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
+const Redis = require("ioredis");
+const redisClient = new Redis(); // Redis client for caching
 
 dotenv.config();
 
@@ -21,43 +25,59 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:8080/"], // Update this to your production domain(s)
+    origin: process.env.FRONTEND_URL,
     methods: ["GET", "POST", "PUT", "DELETE"],
   },
 });
 
 // Middleware configuration
 app.use(express.json());
-app.use(cookieParser());
+app.use(
+  cookieParser(process.env.COOKIE_SECRET, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "strict",
+  })
+);
 app.use(helmet());
-app.use(cors());
+app.use(cors({ origin: process.env.FRONTEND_URL }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Rate limiting for general requests
+// Swagger API Documentation
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Media Platform API",
+      version: "1.0.0",
+      description: "API documentation for the Media Platform",
+    },
+  },
+  apis: ["./routes/*.js"],
+};
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+// Rate limiting
 const generalLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per window
+  windowMs: 15 * 60 * 1000,
+  max: 100,
 });
-app.use(generalLimiter);
-
-// Rate limiting for sensitive actions
 const loginLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // Limit each IP to 5 login requests per window
-  message: "Too many login attempts from this IP, please try again after 15 minutes",
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: "Too many login attempts. Please try again later.",
 });
-
 const passwordResetLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 3, // Limit each IP to 3 password reset requests per window
-  message: "Too many password reset requests from this IP, please try again after 15 minutes",
+  windowMs: 15 * 60 * 1000,
+  max: 3,
+  message: "Too many password reset requests. Please try again later.",
 });
-
 app.use("/api/users/login", loginLimiter);
 app.use("/api/users/forgot-password", passwordResetLimiter);
 
 // Routes
-app.use('/api/users', userRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
 app.use("/api/feed", feedRoutes);
 
@@ -70,7 +90,7 @@ io.use((socket, next) => {
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) return next(new Error("Authentication error"));
-      socket.userId = decoded.id; // Store the user ID in the socket instance
+      socket.userId = decoded.id;
       next();
     });
   } else {
@@ -80,16 +100,15 @@ io.use((socket, next) => {
 
 // WebSocket connection handler
 io.on("connection", (socket) => {
-  logger.info("A user connected: " + socket.id);
-
-  // Automatically join the user's room based on their ID
-  socket.join(socket.userId);
-  logger.info(`User ${socket.userId} joined their room.`);
-
-  // Handle disconnect
+  console.log("A user connected");
   socket.on("disconnect", () => {
-    logger.info("User disconnected: " + socket.id);
+    console.log("User disconnected");
   });
+});
+
+// Redis Caching Middleware
+redisClient.on("error", (err) => {
+  console.error("Redis connection error:", err);
 });
 
 // Connect to MongoDB
@@ -97,6 +116,7 @@ mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    maxPoolSize: 10,
   })
   .then(() => logger.info("MongoDB connected"))
   .catch((err) => logger.error("MongoDB connection error:", err));
@@ -117,5 +137,4 @@ process.on("SIGINT", () => {
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => logger.info(`Server running on port ${PORT}`));
 
-// Export the io instance for use in other modules
 module.exports.io = io;

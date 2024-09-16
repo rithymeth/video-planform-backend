@@ -1,704 +1,717 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Media Platform</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f3f3f3;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Media Platform</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f3f3f3;
+      }
 
-    h1 {
-      color: #333;
-    }
+      h1 {
+        color: #333;
+      }
 
-    .section {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      margin-bottom: 20px;
-    }
+      .section {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+      }
 
-    input,
-    button,
-    select,
-    textarea {
-      padding: 10px;
-      margin: 5px 0;
-      width: calc(100% - 22px);
-      border-radius: 4px;
-      border: 1px solid #ddd;
-      font-size: 16px;
-    }
+      input,
+      button,
+      select,
+      textarea {
+        padding: 10px;
+        margin: 5px 0;
+        width: calc(100% - 22px);
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+      }
 
-    button {
-      cursor: pointer;
-      background-color: #007bff;
-      color: white;
-      border: none;
-    }
+      button {
+        cursor: pointer;
+        background-color: #007bff;
+        color: white;
+        border: none;
+      }
 
-    button:hover {
-      background-color: #0056b3;
-    }
+      button:hover {
+        background-color: #0056b3;
+      }
 
-    .result {
-      margin-top: 10px;
-      padding: 10px;
-      background-color: #f9f9f9;
-      border-radius: 4px;
-      border: 1px solid #ddd;
-      font-size: 14px;
-      white-space: pre-wrap;
-    }
+      .result {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        white-space: pre-wrap;
+      }
 
-    .media-feed {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
+      .media-feed {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
 
-    .media-item {
-      border: 1px solid #ddd;
-      padding: 10px;
-      border-radius: 8px;
-      background: white;
-      width: 300px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    }
+      .media-item {
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 8px;
+        background: white;
+        width: 300px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
 
-    video {
-      width: 100%;
-      border-radius: 8px;
-    }
+      video {
+        width: 100%;
+        border-radius: 8px;
+      }
 
-    .media-item h4 {
-      margin: 0 0 10px 0;
-    }
+      .media-item h4 {
+        margin: 0 0 10px 0;
+      }
 
-    .notification-icon {
-      position: relative;
-      display: inline-block;
-      cursor: pointer;
-    }
+      .notification-icon {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+      }
 
-    .notification-dropdown {
-      position: absolute;
-      right: 0;
-      background-color: white;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      width: 300px;
-      max-height: 400px;
-      overflow-y: auto;
-      display: none;
-    }
+      .notification-dropdown {
+        position: absolute;
+        right: 0;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        max-height: 400px;
+        overflow-y: auto;
+        display: none;
+      }
 
-    .notification-dropdown ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+      .notification-dropdown ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
 
-    .notification-dropdown ul li {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }
+      .notification-dropdown ul li {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
 
-    .notification-dropdown ul li:last-child {
-      border-bottom: none;
-    }
-  </style>
-</head>
-<body>
-  <!-- Notification Bell -->
-  <div class="notification-icon">
-    <span id="notification-bell" onclick="toggleNotifications()">🔔</span>
-    <div id="notification-dropdown" class="notification-dropdown">
-      <h4>Notifications</h4>
-      <ul id="notification-list"></ul>
+      .notification-dropdown ul li:last-child {
+        border-bottom: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Notification Bell -->
+    <div class="notification-icon">
+      <span id="notification-bell" onclick="toggleNotifications()">🔔</span>
+      <div id="notification-dropdown" class="notification-dropdown">
+        <h4>Notifications</h4>
+        <ul id="notification-list"></ul>
+      </div>
     </div>
-  </div>
 
-  <!-- Register User Section -->
-  <div class="section">
-    <h3>Register User</h3>
-    <input type="text" id="register-username" placeholder="Username">
-    <input type="email" id="register-email" placeholder="Email">
-    <input type="password" id="register-password" placeholder="Password">
-    <button onclick="registerUser()">Register</button>
-    <div id="register-result" class="result"></div>
-  </div>
+    <!-- User Interaction Sections -->
+    <div class="section">
+      <h3>Register User</h3>
+      <input type="text" id="register-username" placeholder="Username" />
+      <input type="email" id="register-email" placeholder="Email" />
+      <input type="password" id="register-password" placeholder="Password" />
+      <button onclick="registerUser()">Register</button>
+      <div id="register-result" class="result"></div>
+    </div>
 
-  <!-- Verify Email Section -->
-  <div class="section">
-    <h3>Verify Email</h3>
-    <input type="text" id="verification-token" placeholder="Verification Token">
-    <button onclick="verifyEmail()">Verify</button>
-    <div id="verify-email-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Verify Email</h3>
+      <input
+        type="text"
+        id="verification-token"
+        placeholder="Verification Token"
+      />
+      <button onclick="verifyEmail()">Verify</button>
+      <div id="verify-email-result" class="result"></div>
+    </div>
 
-  <!-- Login User Section -->
-  <div class="section">
-    <h3>Login User</h3>
-    <input type="email" id="login-email" placeholder="Email">
-    <input type="password" id="login-password" placeholder="Password">
-    <button onclick="loginUser()">Login</button>
-    <div id="login-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Login User</h3>
+      <input type="email" id="login-email" placeholder="Email" />
+      <input type="password" id="login-password" placeholder="Password" />
+      <button onclick="loginUser()">Login</button>
+      <div id="login-result" class="result"></div>
+    </div>
 
-  <!-- Logout User Section -->
-  <div class="section">
-    <h3>Logout User</h3>
-    <button onclick="logoutUser()">Logout</button>
-    <div id="logout-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Logout User</h3>
+      <button onclick="logoutUser()">Logout</button>
+      <div id="logout-result" class="result"></div>
+    </div>
 
-  <!-- Fetch User Profile Section -->
-  <div class="section">
-    <h3>Fetch User Profile</h3>
-    <button onclick="fetchUserProfile()">Fetch Profile</button>
-    <div id="fetch-profile-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Fetch User Profile</h3>
+      <button onclick="fetchUserProfile()">Fetch Profile</button>
+      <div id="fetch-profile-result" class="result"></div>
+    </div>
 
-  <!-- Update User Profile Section -->
-  <div class="section">
-    <h3>Update User Profile</h3>
-    <input type="text" id="update-username" placeholder="Username">
-    <input type="email" id="update-email" placeholder="Email">
-    <input type="file" id="update-profile-picture" accept="image/*">
-    <button onclick="updateUserProfile()">Update Profile</button>
-    <div id="update-profile-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Update User Profile</h3>
+      <input type="text" id="update-username" placeholder="Username" />
+      <input type="email" id="update-email" placeholder="Email" />
+      <input type="file" id="update-profile-picture" accept="image/*" />
+      <button onclick="updateUserProfile()">Update Profile</button>
+      <div id="update-profile-result" class="result"></div>
+    </div>
 
-  <!-- Change Password Section -->
-  <div class="section">
-    <h3>Change Password</h3>
-    <input type="password" id="old-password" placeholder="Old Password">
-    <input type="password" id="new-password" placeholder="New Password">
-    <button onclick="changePassword()">Change Password</button>
-    <div id="change-password-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Change Password</h3>
+      <input type="password" id="old-password" placeholder="Old Password" />
+      <input type="password" id="new-password" placeholder="New Password" />
+      <button onclick="changePassword()">Change Password</button>
+      <div id="change-password-result" class="result"></div>
+    </div>
 
-  <!-- Forgot Password Section -->
-  <div class="section">
-    <h3>Forgot Password</h3>
-    <input type="email" id="forgot-password-email" placeholder="Email">
-    <button onclick="forgotPassword()">Forgot Password</button>
-    <div id="forgot-password-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Forgot Password</h3>
+      <input type="email" id="forgot-password-email" placeholder="Email" />
+      <button onclick="forgotPassword()">Forgot Password</button>
+      <div id="forgot-password-result" class="result"></div>
+    </div>
 
-  <!-- Reset Password Section -->
-  <div class="section">
-    <h3>Reset Password</h3>
-    <input type="text" id="reset-token" placeholder="Reset Token">
-    <input type="password" id="reset-new-password" placeholder="New Password">
-    <button onclick="resetPassword()">Reset Password</button>
-    <div id="reset-password-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Reset Password</h3>
+      <input type="text" id="reset-token" placeholder="Reset Token" />
+      <input
+        type="password"
+        id="reset-new-password"
+        placeholder="New Password"
+      />
+      <button onclick="resetPassword()">Reset Password</button>
+      <div id="reset-password-result" class="result"></div>
+    </div>
 
-  <!-- Toggle Two-Factor Authentication Section -->
-  <div class="section" id="two-fa-section" style="display:none;">
-    <h3>Toggle Two-Factor Authentication</h3>
-    <button onclick="toggleTwoFactor()">Toggle 2FA</button>
-    <div id="toggle-2fa-result" class="result"></div>
-  </div>
+    <div class="section" id="two-fa-section" style="display: none">
+      <h3>Toggle Two-Factor Authentication</h3>
+      <button onclick="toggleTwoFactor()">Toggle 2FA</button>
+      <div id="toggle-2fa-result" class="result"></div>
+    </div>
 
-  <!-- Upload Profile Picture Section -->
-  <div class="section">
-    <h3>Upload Profile Picture</h3>
-    <input type="file" id="upload-profile-picture" accept="image/*">
-    <button onclick="uploadProfilePicture()">Upload Profile Picture</button>
-    <div id="upload-profile-picture-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Upload Profile Picture</h3>
+      <input type="file" id="upload-profile-picture" accept="image/*" />
+      <button onclick="uploadProfilePicture()">Upload Profile Picture</button>
+      <div id="upload-profile-picture-result" class="result"></div>
+    </div>
 
-  <!-- Search Users Section -->
-  <div class="section">
-    <h3>Search Users</h3>
-    <input type="text" id="search-query" placeholder="Search Query">
-    <select id="search-sort">
-      <option value="createdAt">Date</option>
-      <option value="likes">Likes</option>
-    </select>
-    <select id="search-order">
-      <option value="desc">Descending</option>
-      <option value="asc">Ascending</option>
-    </select>
-    <button onclick="searchUsers()">Search Users</button>
-    <div id="search-results" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Search Users</h3>
+      <input type="text" id="search-query" placeholder="Search Query" />
+      <select id="search-sort">
+        <option value="createdAt">Date</option>
+        <option value="likes">Likes</option>
+      </select>
+      <select id="search-order">
+        <option value="desc">Descending</option>
+        <option value="asc">Ascending</option>
+      </select>
+      <button onclick="searchUsers()">Search Users</button>
+      <div id="search-results" class="result"></div>
+    </div>
 
-  <!-- Add User Section (Admin Only) -->
-  <div class="section admin-only">
-    <h3>Add User (Admin Only)</h3>
-    <input type="text" id="add-username" placeholder="Username">
-    <input type="email" id="add-email" placeholder="Email">
-    <input type="password" id="add-password" placeholder="Password">
-    <button onclick="addUser()">Add User</button>
-    <div id="add-user-result" class="result"></div>
-  </div>
+    <div class="section admin-only">
+      <h3>Add User (Admin Only)</h3>
+      <input type="text" id="add-username" placeholder="Username" />
+      <input type="email" id="add-email" placeholder="Email" />
+      <input type="password" id="add-password" placeholder="Password" />
+      <button onclick="addUser()">Add User</button>
+      <div id="add-user-result" class="result"></div>
+    </div>
 
-  <!-- Upload Video Section -->
-  <div class="section">
-    <h3>Upload Video</h3>
-    <input type="text" id="video-title" placeholder="Video Title">
-    <input type="text" id="video-description" placeholder="Video Description">
-    <input type="file" id="video-file" accept="video/*">
-    <button onclick="uploadVideo()">Upload Video</button>
-    <div id="upload-video-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Upload Video</h3>
+      <input type="text" id="video-title" placeholder="Video Title" />
+      <input
+        type="text"
+        id="video-description"
+        placeholder="Video Description"
+      />
+      <input type="file" id="video-file" accept="video/*" />
+      <button onclick="uploadVideo()">Upload Video</button>
+      <div id="upload-video-result" class="result"></div>
+    </div>
 
-  <!-- Get All Videos Section -->
-  <div class="section">
-    <h3>Get All Videos</h3>
-    <button onclick="getAllVideos()">Get All Videos</button>
-    <div id="get-videos-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Get All Videos</h3>
+      <button onclick="getAllVideos()">Get All Videos</button>
+      <div id="get-videos-result" class="result"></div>
+    </div>
 
-  <!-- Like Video Section -->
-  <div class="section">
-    <h3>Like Video</h3>
-    <input type="text" id="like-video-id" placeholder="Video ID">
-    <button onclick="likeVideo()">Like Video</button>
-    <div id="like-video-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Like Video</h3>
+      <input type="text" id="like-video-id" placeholder="Video ID" />
+      <button onclick="likeVideo()">Like Video</button>
+      <div id="like-video-result" class="result"></div>
+    </div>
 
-  <!-- Comment on Video Section -->
-  <div class="section">
-    <h3>Comment on Video</h3>
-    <input type="text" id="comment-video-id" placeholder="Video ID">
-    <textarea id="comment-text" placeholder="Comment"></textarea>
-    <button onclick="commentOnVideo()">Comment</button>
-    <div id="comment-video-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Comment on Video</h3>
+      <input type="text" id="comment-video-id" placeholder="Video ID" />
+      <textarea id="comment-text" placeholder="Comment"></textarea>
+      <button onclick="commentOnVideo()">Comment</button>
+      <div id="comment-video-result" class="result"></div>
+    </div>
 
-  <!-- Stream Video Section -->
-  <div class="section">
-    <h3>Stream Video</h3>
-    <input type="text" id="stream-video-id" placeholder="Video ID">
-    <button onclick="streamVideo()">Stream Video</button>
-    <video id="stream-video" controls></video>
-    <div id="stream-video-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Stream Video</h3>
+      <input type="text" id="stream-video-id" placeholder="Video ID" />
+      <button onclick="streamVideo()">Stream Video</button>
+      <video id="stream-video" controls></video>
+      <div id="stream-video-result" class="result"></div>
+    </div>
 
-  <!-- Get Media Feed Section -->
-  <div class="section">
-    <h3>Get Media Feed</h3>
-    <button onclick="getFeed()">Get Feed</button>
-    <div id="feed-result" class="result"></div>
-    <div id="media-feed" class="media-feed"></div>
-  </div>
+    <div class="section">
+      <h3>Get Media Feed</h3>
+      <button onclick="getFeed()">Get Feed</button>
+      <div id="feed-result" class="result"></div>
+      <div id="media-feed" class="media-feed"></div>
+    </div>
 
-  <!-- Share and Embed Video Section -->
-  <div class="section">
-    <h3>Share and Embed Video</h3>
-    <input type="text" id="embed-video-id" placeholder="Video ID">
-    <button onclick="getEmbedCode()">Get Embed Code</button>
-    <div id="embed-code-result" class="result"></div>
-    <button onclick="copyEmbedCode()">Copy Embed Code</button>
-  </div>
+    <div class="section">
+      <h3>Share and Embed Video</h3>
+      <input type="text" id="embed-video-id" placeholder="Video ID" />
+      <button onclick="getEmbedCode()">Get Embed Code</button>
+      <div id="embed-code-result" class="result"></div>
+      <button onclick="copyEmbedCode()">Copy Embed Code</button>
+    </div>
 
-  <!-- Video Analytics Section -->
-  <div class="section">
-    <h3>Video Analytics</h3>
-    <input type="text" id="analytics-video-id" placeholder="Video ID">
-    <button onclick="getVideoAnalytics()">Get Analytics</button>
-    <div id="video-analytics-result" class="result"></div>
-  </div>
+    <div class="section">
+      <h3>Video Analytics</h3>
+      <input type="text" id="analytics-video-id" placeholder="Video ID" />
+      <button onclick="getVideoAnalytics()">Get Analytics</button>
+      <div id="video-analytics-result" class="result"></div>
+    </div>
 
-  <script>
-    const baseUrl = "http://localhost:5000/api";
-    let token = "";
+    <!-- Include Socket.IO client -->
+    <script src="http://localhost:5000/socket.io/socket.io.js"></script>
+    <script>
+      const baseUrl = "http://localhost:5000/api";
+      let token = "";
 
-    // Initialize Socket.io
-    const socket = io("http://localhost:5000", {
-      auth: {
-        token: token, // Send token for WebSocket authentication
-      },
-    });
-
-    // Listen for real-time notifications
-    socket.on('newNotification', (notification) => {
-      addNotification(notification);
-    });
-
-    // Function to display new notifications
-    function addNotification(notification) {
-      const notificationList = document.getElementById('notification-list');
-      const notificationItem = document.createElement('li');
-      notificationItem.textContent = `${notification.fromUser.username}: ${notification.content}`;
-      notificationList.appendChild(notificationItem);
-    }
-
-    // Function to toggle notification dropdown
-    function toggleNotifications() {
-      const dropdown = document.getElementById('notification-dropdown');
-      dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-    }
-
-    // Helper function to display results
-    function displayResult(elementId, result) {
-      document.getElementById(elementId).textContent = JSON.stringify(result, null, 2);
-    }
-
-    // Register User
-    async function registerUser() {
-      const username = document.getElementById("register-username").value;
-      const email = document.getElementById("register-email").value;
-      const password = document.getElementById("register-password").value;
-
-      const response = await fetch(`${baseUrl}/users/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, email, password }),
-      });
-
-      const result = await response.json();
-      displayResult("register-result", result);
-    }
-
-    // Verify Email
-    async function verifyEmail() {
-      const token = document.getElementById("verification-token").value;
-
-      const response = await fetch(`${baseUrl}/users/verify-email/${token}`, {
-        method: "GET",
-      });
-
-      const result = await response.json();
-      displayResult("verify-email-result", result);
-    }
-
-    // Login User
-    async function loginUser() {
-      const email = document.getElementById("login-email").value;
-      const password = document.getElementById("login-password").value;
-
-      const response = await fetch(`${baseUrl}/users/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const result = await response.json();
-      if (response.ok) {
-        token = result.token; // Store token for authenticated requests
-        displayResult("login-result", result);
-        document.getElementById("two-fa-section").style.display = "block";
-        updateUIForRole(result.role); // Update UI for the user's role
-      } else {
-        displayResult("login-result", result);
-      }
-    }
-
-    // Logout User
-    async function logoutUser() {
-      const response = await fetch(`${baseUrl}/users/logout`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      // Initialize Socket.io
+      const socket = io("http://localhost:5000", {
+        auth: {
+          token: localStorage.getItem("token"), // Send token for WebSocket authentication
         },
       });
 
-      const result = await response.json();
-      displayResult("logout-result", result);
-    }
-
-    // Fetch User Profile
-    async function fetchUserProfile() {
-      const response = await fetch(`${baseUrl}/users/profile`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+      // Listen for real-time notifications
+      socket.on("newNotification", (notification) => {
+        addNotification(notification);
       });
 
-      const result = await response.json();
-      displayResult("fetch-profile-result", result);
-    }
-
-    // Update User Profile
-    async function updateUserProfile() {
-      const username = document.getElementById("update-username").value;
-      const email = document.getElementById("update-email").value;
-      const profilePicture = document.getElementById("update-profile-picture").files[0];
-
-      const formData = new FormData();
-      formData.append("username", username);
-      formData.append("email", email);
-      if (profilePicture) {
-        formData.append("profilePicture", profilePicture);
+      // Function to display new notifications
+      function addNotification(notification) {
+        const notificationList = document.getElementById("notification-list");
+        const notificationItem = document.createElement("li");
+        notificationItem.textContent = `${notification.fromUser.username}: ${notification.content}`;
+        notificationList.appendChild(notificationItem);
       }
 
-      const response = await fetch(`${baseUrl}/users/profile`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
-
-      const result = await response.json();
-      displayResult("update-profile-result", result);
-    }
-
-    // Change Password
-    async function changePassword() {
-      const oldPassword = document.getElementById("old-password").value;
-      const newPassword = document.getElementById("new-password").value;
-
-      const response = await fetch(`${baseUrl}/users/change-password`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ oldPassword, newPassword }),
-      });
-
-      const result = await response.json();
-      displayResult("change-password-result", result);
-    }
-
-    // Forgot Password
-    async function forgotPassword() {
-      const email = document.getElementById("forgot-password-email").value;
-
-      const response = await fetch(`${baseUrl}/users/forgot-password`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const result = await response.json();
-      displayResult("forgot-password-result", result);
-    }
-
-    // Reset Password
-    async function resetPassword() {
-      const token = document.getElementById("reset-token").value;
-      const newPassword = document.getElementById("reset-new-password").value;
-
-      const response = await fetch(`${baseUrl}/users/reset-password/${token}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ newPassword }),
-      });
-
-      const result = await response.json();
-      displayResult("reset-password-result", result);
-    }
-
-    // Toggle Two-Factor Authentication
-    async function toggleTwoFactor() {
-      const response = await fetch(`${baseUrl}/users/toggle-2fa`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const result = await response.json();
-      displayResult("toggle-2fa-result", result);
-    }
-
-    // Upload Profile Picture
-    async function uploadProfilePicture() {
-      const profilePicture = document.getElementById("upload-profile-picture").files[0];
-
-      const formData = new FormData();
-      formData.append("profilePicture", profilePicture);
-
-      const response = await fetch(`${baseUrl}/users/upload/profile-picture`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
-
-      const result = await response.json();
-      displayResult("upload-profile-picture-result", result);
-    }
-
-    // Search Users
-    async function searchUsers() {
-      const query = document.getElementById("search-query").value;
-      const sortBy = document.getElementById("search-sort").value;
-      const order = document.getElementById("search-order").value;
-
-      const response = await fetch(`${baseUrl}/users/search?query=${query}&sortBy=${sortBy}&order=${order}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const result = await response.json();
-      displayResult("search-results", result);
-    }
-
-    // Add User (Admin Only)
-    async function addUser() {
-      const username = document.getElementById("add-username").value;
-      const email = document.getElementById("add-email").value;
-      const password = document.getElementById("add-password").value;
-
-      const response = await fetch(`${baseUrl}/users/add`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Admin token required
-        },
-        body: JSON.stringify({ username, email, password }),
-      });
-
-      const result = await response.json();
-      displayResult("add-user-result", result);
-    }
-
-    // Upload Video
-    async function uploadVideo() {
-      const title = document.getElementById("video-title").value;
-      const description = document.getElementById("video-description").value;
-      const videoFile = document.getElementById("video-file").files[0];
-
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("description", description);
-      formData.append("video", videoFile);
-
-      const response = await fetch(`${baseUrl}/videos/upload`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
-
-      const result = await response.json();
-      displayResult("upload-video-result", result);
-    }
-
-    // Get All Videos
-    async function getAllVideos() {
-      const response = await fetch(`${baseUrl}/videos/`, {
-        method: "GET",
-      });
-
-      const result = await response.json();
-      displayResult("get-videos-result", result);
-    }
-
-    // Like Video
-    async function likeVideo() {
-      const videoId = document.getElementById("like-video-id").value;
-
-      const response = await fetch(`${baseUrl}/videos/${videoId}/like`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const result = await response.json();
-      displayResult("like-video-result", result);
-    }
-
-    // Comment on Video
-    async function commentOnVideo() {
-      const videoId = document.getElementById("comment-video-id").value;
-      const commentText = document.getElementById("comment-text").value;
-
-      const response = await fetch(`${baseUrl}/videos/${videoId}/comment`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ text: commentText }),
-      });
-
-      const result = await response.json();
-      displayResult("comment-video-result", result);
-    }
-
-    // Stream Video
-    async function streamVideo() {
-      const videoId = document.getElementById("stream-video-id").value;
-      const videoElement = document.getElementById("stream-video");
-
-      const response = await fetch(`${baseUrl}/videos/${videoId}/stream`, {
-        method: "GET",
-      });
-
-      if (response.ok) {
-        videoElement.src = URL.createObjectURL(await response.blob());
-      } else {
-        displayResult("stream-video-result", await response.json());
+      // Function to toggle notification dropdown
+      function toggleNotifications() {
+        const dropdown = document.getElementById("notification-dropdown");
+        dropdown.style.display =
+          dropdown.style.display === "none" ? "block" : "none";
       }
-    }
 
-    // Get Media Feed
-    async function getFeed() {
-      const response = await fetch(`${baseUrl}/feed/`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        if (Array.isArray(result)) {
-          displayFeed(result); // Pass media items to display function if it's an array
-        } else {
-          displayResult("feed-result", {
-            error: "Unexpected response format: expected an array.",
-          });
-        }
-      } else {
-        displayResult("feed-result", result);
+      // Helper function to display results
+      function displayResult(elementId, result) {
+        document.getElementById(elementId).textContent = JSON.stringify(
+          result,
+          null,
+          2
+        );
       }
-    }
 
-    // Display Media Feed
-    function displayFeed(mediaItems) {
-      const feedContainer = document.getElementById("media-feed");
-      feedContainer.innerHTML = ""; // Clear previous content
+      // Register User
+      async function registerUser() {
+        const username = document.getElementById("register-username").value;
+        const email = document.getElementById("register-email").value;
+        const password = document.getElementById("register-password").value;
 
-      if (!Array.isArray(mediaItems)) {
-        displayResult("feed-result", {
-          error: "Media items is not an array",
+        const response = await fetch(`${baseUrl}/users/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, email, password }),
         });
-        return;
+
+        const result = await response.json();
+        displayResult("register-result", result);
       }
 
-      mediaItems.forEach((item) => {
-        const mediaElement = document.createElement("div");
-        mediaElement.className = "media-item";
+      // Verify Email
+      async function verifyEmail() {
+        const token = document.getElementById("verification-token").value;
 
-        mediaElement.innerHTML = `
+        const response = await fetch(`${baseUrl}/users/verify-email/${token}`, {
+          method: "GET",
+        });
+
+        const result = await response.json();
+        displayResult("verify-email-result", result);
+      }
+
+      // Login User
+      async function loginUser() {
+        const email = document.getElementById("login-email").value;
+        const password = document.getElementById("login-password").value;
+
+        const response = await fetch(`${baseUrl}/users/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          token = result.token; // Store token for authenticated requests
+          localStorage.setItem("token", token); // Save token to local storage
+          displayResult("login-result", result);
+          document.getElementById("two-fa-section").style.display = "block";
+          updateUIForRole(result.role); // Update UI for the user's role
+        } else {
+          displayResult("login-result", result);
+        }
+      }
+
+      // Logout User
+      async function logoutUser() {
+        const response = await fetch(`${baseUrl}/users/logout`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const result = await response.json();
+        displayResult("logout-result", result);
+        localStorage.removeItem("token"); // Remove token from local storage
+        token = ""; // Clear token in memory
+      }
+
+      // Fetch User Profile
+      async function fetchUserProfile() {
+        const response = await fetch(`${baseUrl}/users/profile`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const result = await response.json();
+        displayResult("fetch-profile-result", result);
+      }
+
+      // Update User Profile
+      async function updateUserProfile() {
+        const username = document.getElementById("update-username").value;
+        const email = document.getElementById("update-email").value;
+        const profilePicture = document.getElementById("update-profile-picture")
+          .files[0];
+
+        const formData = new FormData();
+        formData.append("username", username);
+        formData.append("email", email);
+        if (profilePicture) {
+          formData.append("profilePicture", profilePicture);
+        }
+
+        const response = await fetch(`${baseUrl}/users/profile`, {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        });
+
+        const result = await response.json();
+        displayResult("update-profile-result", result);
+      }
+
+      // Change Password
+      async function changePassword() {
+        const oldPassword = document.getElementById("old-password").value;
+        const newPassword = document.getElementById("new-password").value;
+
+        const response = await fetch(`${baseUrl}/users/change-password`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ oldPassword, newPassword }),
+        });
+
+        const result = await response.json();
+        displayResult("change-password-result", result);
+      }
+
+      // Forgot Password
+      async function forgotPassword() {
+        const email = document.getElementById("forgot-password-email").value;
+
+        const response = await fetch(`${baseUrl}/users/forgot-password`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        });
+
+        const result = await response.json();
+        displayResult("forgot-password-result", result);
+      }
+
+      // Reset Password
+      async function resetPassword() {
+        const token = document.getElementById("reset-token").value;
+        const newPassword = document.getElementById("reset-new-password").value;
+
+        const response = await fetch(
+          `${baseUrl}/users/reset-password/${token}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ newPassword }),
+          }
+        );
+
+        const result = await response.json();
+        displayResult("reset-password-result", result);
+      }
+
+      // Toggle Two-Factor Authentication
+      async function toggleTwoFactor() {
+        const response = await fetch(`${baseUrl}/users/toggle-2fa`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const result = await response.json();
+        displayResult("toggle-2fa-result", result);
+      }
+
+      // Upload Profile Picture
+      async function uploadProfilePicture() {
+        const profilePicture = document.getElementById("upload-profile-picture")
+          .files[0];
+
+        const formData = new FormData();
+        formData.append("profilePicture", profilePicture);
+
+        const response = await fetch(
+          `${baseUrl}/users/upload/profile-picture`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+          }
+        );
+
+        const result = await response.json();
+        displayResult("upload-profile-picture-result", result);
+      }
+
+      // Search Users
+      async function searchUsers() {
+        const query = document.getElementById("search-query").value;
+        const sortBy = document.getElementById("search-sort").value;
+        const order = document.getElementById("search-order").value;
+
+        const response = await fetch(
+          `${baseUrl}/users/search?query=${query}&sortBy=${sortBy}&order=${order}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const result = await response.json();
+        displayResult("search-results", result);
+      }
+
+      // Add User (Admin Only)
+      async function addUser() {
+        const username = document.getElementById("add-username").value;
+        const email = document.getElementById("add-email").value;
+        const password = document.getElementById("add-password").value;
+
+        const response = await fetch(`${baseUrl}/users/add`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Admin token required
+          },
+          body: JSON.stringify({ username, email, password }),
+        });
+
+        const result = await response.json();
+        displayResult("add-user-result", result);
+      }
+
+      // Upload Video
+      async function uploadVideo() {
+        const title = document.getElementById("video-title").value;
+        const description = document.getElementById("video-description").value;
+        const videoFile = document.getElementById("video-file").files[0];
+
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("video", videoFile);
+
+        const response = await fetch(`${baseUrl}/videos/upload`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        });
+
+        const result = await response.json();
+        displayResult("upload-video-result", result);
+      }
+
+      // Get All Videos
+      async function getAllVideos() {
+        const response = await fetch(`${baseUrl}/videos/`, {
+          method: "GET",
+        });
+
+        const result = await response.json();
+        displayResult("get-videos-result", result);
+      }
+
+      // Like Video
+      async function likeVideo() {
+        const videoId = document.getElementById("like-video-id").value;
+
+        const response = await fetch(`${baseUrl}/videos/${videoId}/like`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const result = await response.json();
+        displayResult("like-video-result", result);
+      }
+
+      // Comment on Video
+      async function commentOnVideo() {
+        const videoId = document.getElementById("comment-video-id").value;
+        const commentText = document.getElementById("comment-text").value;
+
+        const response = await fetch(`${baseUrl}/videos/${videoId}/comment`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ text: commentText }),
+        });
+
+        const result = await response.json();
+        displayResult("comment-video-result", result);
+      }
+
+      // Stream Video
+      async function streamVideo() {
+        const videoId = document.getElementById("stream-video-id").value;
+        const videoElement = document.getElementById("stream-video");
+
+        const response = await fetch(`${baseUrl}/videos/${videoId}/stream`, {
+          method: "GET",
+        });
+
+        if (response.ok) {
+          videoElement.src = URL.createObjectURL(await response.blob());
+        } else {
+          displayResult("stream-video-result", await response.json());
+        }
+      }
+
+      // Get Media Feed
+      async function getFeed() {
+        const response = await fetch(`${baseUrl}/feed/`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          if (Array.isArray(result)) {
+            displayFeed(result); // Pass media items to display function if it's an array
+          } else {
+            displayResult("feed-result", {
+              error: "Unexpected response format: expected an array.",
+            });
+          }
+        } else {
+          displayResult("feed-result", result);
+        }
+      }
+
+      // Display Media Feed
+      function displayFeed(mediaItems) {
+        const feedContainer = document.getElementById("media-feed");
+        feedContainer.innerHTML = ""; // Clear previous content
+
+        if (!Array.isArray(mediaItems)) {
+          displayResult("feed-result", {
+            error: "Media items is not an array",
+          });
+          return;
+        }
+
+        mediaItems.forEach((item) => {
+          const mediaElement = document.createElement("div");
+          mediaElement.className = "media-item";
+
+          mediaElement.innerHTML = `
           <h4>${item.title}</h4>
           <p>${item.description}</p>
           <video controls>
@@ -708,64 +721,80 @@
           <p>Uploaded by: ${item.user?.username || "Unknown"}</p>
         `;
 
-        feedContainer.appendChild(mediaElement);
-      });
-    }
-
-    // Get Embed Code
-    async function getEmbedCode() {
-      const videoId = document.getElementById("embed-video-id").value;
-
-      const response = await fetch(`${baseUrl}/videos/${videoId}/embed`, {
-        method: "GET",
-      });
-
-      const result = await response.json();
-      displayResult("embed-code-result", result.embedCode);
-    }
-
-    // Copy Embed Code to Clipboard
-    function copyEmbedCode() {
-      const embedCode = document.getElementById("embed-code-result").textContent;
-      navigator.clipboard.writeText(embedCode).then(() => {
-        alert('Embed code copied to clipboard!');
-      }).catch(err => {
-        console.error('Failed to copy embed code:', err);
-      });
-    }
-
-    // Fetch Video Analytics
-    async function getVideoAnalytics() {
-      const videoId = document.getElementById("analytics-video-id").value;
-
-      const response = await fetch(`${baseUrl}/videos/${videoId}/analytics`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const result = await response.json();
-      displayResult("video-analytics-result", result);
-    }
-
-    // Update UI Based on Role
-    function updateUIForRole(role) {
-      const adminOnlySections = document.querySelectorAll('.admin-only');
-      const moderatorSections = document.querySelectorAll('.moderator-only');
-
-      if (role === 'admin') {
-        adminOnlySections.forEach(section => section.style.display = 'block');
-        moderatorSections.forEach(section => section.style.display = 'block');
-      } else if (role === 'moderator') {
-        adminOnlySections.forEach(section => section.style.display = 'none');
-        moderatorSections.forEach(section => section.style.display = 'block');
-      } else {
-        adminOnlySections.forEach(section => section.style.display = 'none');
-        moderatorSections.forEach(section => section.style.display = 'none');
+          feedContainer.appendChild(mediaElement);
+        });
       }
-    }
-  </script>
-</body>
+
+      // Get Embed Code
+      async function getEmbedCode() {
+        const videoId = document.getElementById("embed-video-id").value;
+
+        const response = await fetch(`${baseUrl}/videos/${videoId}/embed`, {
+          method: "GET",
+        });
+
+        const result = await response.json();
+        displayResult("embed-code-result", result.embedCode);
+      }
+
+      // Copy Embed Code to Clipboard
+      function copyEmbedCode() {
+        const embedCode =
+          document.getElementById("embed-code-result").textContent;
+        navigator.clipboard
+          .writeText(embedCode)
+          .then(() => {
+            alert("Embed code copied to clipboard!");
+          })
+          .catch((err) => {
+            console.error("Failed to copy embed code:", err);
+          });
+      }
+
+      // Fetch Video Analytics
+      async function getVideoAnalytics() {
+        const videoId = document.getElementById("analytics-video-id").value;
+
+        const response = await fetch(`${baseUrl}/videos/${videoId}/analytics`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const result = await response.json();
+        displayResult("video-analytics-result", result);
+      }
+
+      // Update UI Based on Role
+      function updateUIForRole(role) {
+        const adminOnlySections = document.querySelectorAll(".admin-only");
+        const moderatorSections = document.querySelectorAll(".moderator-only");
+
+        if (role === "admin") {
+          adminOnlySections.forEach(
+            (section) => (section.style.display = "block")
+          );
+          moderatorSections.forEach(
+            (section) => (section.style.display = "block")
+          );
+        } else if (role === "moderator") {
+          adminOnlySections.forEach(
+            (section) => (section.style.display = "none")
+          );
+          moderatorSections.forEach(
+            (section) => (section.style.display = "block")
+          );
+        } else {
+          adminOnlySections.forEach(
+            (section) => (section.style.display = "none")
+          );
+          moderatorSections.forEach(
+            (section) => (section.style.display = "none")
+          );
+        }
+      }
+    </script>
+  </body>
 </html>

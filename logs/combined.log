@@ -102,3 +102,243 @@
 2024-09-14T10:07:03.112Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
 2024-09-14T10:07:03.112Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
 2024-09-14T10:07:03.113Z [32minfo[39m: ::1 - - [14/Sep/2024:10:07:03 +0000] "POST /api/users/request-reset-password HTTP/1.1" 500 24 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+2024-09-15T13:06:31.136Z [32minfo[39m: Server running on port 5000
+2024-09-15T13:06:31.895Z [32minfo[39m: MongoDB connected
+2024-09-15T14:04:50.230Z [32minfo[39m: Shutting down gracefully...
+2024-09-15T14:04:52.737Z [32minfo[39m: Server running on port 5000
+2024-09-15T14:04:53.446Z [32minfo[39m: MongoDB connected
+2024-09-15T14:27:42.481Z [32minfo[39m: Shutting down gracefully...
+2024-09-15T14:27:44.863Z [32minfo[39m: Server running on port 5000
+2024-09-15T14:27:45.682Z [32minfo[39m: MongoDB connected
+2024-09-15T14:29:08.962Z [32minfo[39m: Shutting down gracefully...
+2024-09-15T14:29:46.779Z [32minfo[39m: Server running on port 5000
+2024-09-15T14:29:47.485Z [32minfo[39m: MongoDB connected
+2024-09-16T03:40:34.031Z [32minfo[39m: Server running on port 5000
+2024-09-16T03:40:34.694Z [32minfo[39m: MongoDB connected
+2024-09-16T03:53:14.314Z [32minfo[39m: Server running on port 5000
+2024-09-16T03:53:14.969Z [32minfo[39m: MongoDB connected
+2024-09-16T04:03:24.243Z [32minfo[39m: A user connected: howSxsoL3VwNZod4AAG-
+2024-09-16T04:03:24.244Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:03:25.914Z [32minfo[39m: User disconnected: howSxsoL3VwNZod4AAG-
+2024-09-16T04:03:26.045Z [32minfo[39m: A user connected: ffMQpLsrMRVpWyT6AAHF
+2024-09-16T04:03:26.045Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:03:50.990Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T04:03:51.675Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T04:03:53.683Z [32minfo[39m: Server running on port 5000
+2024-09-16T04:03:54.403Z [32minfo[39m: MongoDB connected
+2024-09-16T04:13:07.131Z [32minfo[39m: User disconnected: ffMQpLsrMRVpWyT6AAHF
+2024-09-16T04:15:15.342Z [32minfo[39m: A user connected: SqD_J1TSMWdNMCe_AAJd
+2024-09-16T04:15:15.342Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:15:16.909Z [32minfo[39m: User disconnected: SqD_J1TSMWdNMCe_AAJd
+2024-09-16T04:15:17.023Z [32minfo[39m: A user connected: YyO3sgoIjkEqAf-pAAJf
+2024-09-16T04:15:17.023Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:15:50.720Z [32minfo[39m: User disconnected: YyO3sgoIjkEqAf-pAAJf
+2024-09-16T04:15:50.839Z [32minfo[39m: A user connected: P9pzrufebcV31Qw1AAJo
+2024-09-16T04:15:50.839Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:16:07.530Z [32minfo[39m: User disconnected: P9pzrufebcV31Qw1AAJo
+2024-09-16T04:16:07.735Z [32minfo[39m: A user connected: mOa24sAvVhNcbKhDAAJu
+2024-09-16T04:16:07.736Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:16:07.737Z [32minfo[39m: A user connected: hhYxjjNbk5dvfj1MAAJv
+2024-09-16T04:16:07.737Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:16:07.768Z [32minfo[39m: User disconnected: hhYxjjNbk5dvfj1MAAJv
+2024-09-16T04:16:07.769Z [32minfo[39m: User disconnected: mOa24sAvVhNcbKhDAAJu
+2024-09-16T04:16:07.997Z [32minfo[39m: A user connected: 0vmARYBNK3SGWAElAAJ0
+2024-09-16T04:16:07.998Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:16:07.999Z [32minfo[39m: A user connected: eGP2Wg4u35EyeIoLAAJ1
+2024-09-16T04:16:08.000Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:16:10.082Z [32minfo[39m: User disconnected: 0vmARYBNK3SGWAElAAJ0
+2024-09-16T04:16:10.083Z [32minfo[39m: User disconnected: eGP2Wg4u35EyeIoLAAJ1
+2024-09-16T04:16:10.208Z [32minfo[39m: A user connected: RI24PLoPoSF7c8laAAJ6
+2024-09-16T04:16:10.208Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:16:10.209Z [32minfo[39m: A user connected: GfVe4DhSvpwp6CXYAAJ7
+2024-09-16T04:16:10.209Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:17:34.032Z [32minfo[39m: User disconnected: RI24PLoPoSF7c8laAAJ6
+2024-09-16T04:17:34.033Z [32minfo[39m: User disconnected: GfVe4DhSvpwp6CXYAAJ7
+2024-09-16T04:18:07.002Z [32minfo[39m: A user connected: wEKMJFzuFwRwlKtgAAKm
+2024-09-16T04:18:07.003Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:18:07.005Z [32minfo[39m: A user connected: AfRHHU6eMPXSfhUeAAKn
+2024-09-16T04:18:07.005Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:18:08.681Z [32minfo[39m: User disconnected: wEKMJFzuFwRwlKtgAAKm
+2024-09-16T04:18:08.682Z [32minfo[39m: User disconnected: AfRHHU6eMPXSfhUeAAKn
+2024-09-16T04:18:08.826Z [32minfo[39m: A user connected: 1ERNbL4us79F0rcuAAKt
+2024-09-16T04:18:08.826Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:18:08.829Z [32minfo[39m: A user connected: vRX_WENAUt9lkQpRAAKu
+2024-09-16T04:18:08.829Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:19:20.155Z [32minfo[39m: User disconnected: 1ERNbL4us79F0rcuAAKt
+2024-09-16T04:19:20.156Z [32minfo[39m: User disconnected: vRX_WENAUt9lkQpRAAKu
+2024-09-16T04:19:20.278Z [32minfo[39m: A user connected: QH2Lm2UIff4Ewv05AALM
+2024-09-16T04:19:20.279Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:19:20.280Z [32minfo[39m: A user connected: Y6zTkqw-VD2au0HKAALN
+2024-09-16T04:19:20.280Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:20:30.776Z [32minfo[39m: User disconnected: Y6zTkqw-VD2au0HKAALN
+2024-09-16T04:20:30.777Z [32minfo[39m: User disconnected: QH2Lm2UIff4Ewv05AALM
+2024-09-16T04:20:30.922Z [32minfo[39m: A user connected: GCklFXJMZ9P7S4mEAALm
+2024-09-16T04:20:30.922Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T04:20:30.926Z [32minfo[39m: A user connected: sfI00aaaFVzZuCIgAALn
+2024-09-16T04:20:30.926Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:13:33.119Z [32minfo[39m: User disconnected: sfI00aaaFVzZuCIgAALn
+2024-09-16T05:13:33.120Z [32minfo[39m: User disconnected: GCklFXJMZ9P7S4mEAALm
+2024-09-16T05:15:27.393Z [32minfo[39m: A user connected: lAMPwaJhoEBBfPvGAAc8
+2024-09-16T05:15:27.394Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:15:27.395Z [32minfo[39m: A user connected: h-ROATWl7Naym3HAAAc9
+2024-09-16T05:15:27.395Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:19:03.439Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T05:19:03.612Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T05:20:40.494Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:20:41.222Z [32minfo[39m: MongoDB connected
+2024-09-16T05:21:32.237Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T05:21:32.237Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T05:21:32.405Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T05:21:42.405Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T05:21:42.528Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T05:21:44.235Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:21:44.914Z [32minfo[39m: MongoDB connected
+2024-09-16T05:21:55.921Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T05:21:55.921Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T05:21:56.522Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T05:21:58.091Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:21:58.748Z [32minfo[39m: MongoDB connected
+2024-09-16T05:23:14.563Z [32minfo[39m: User disconnected: h-ROATWl7Naym3HAAAc9
+2024-09-16T05:23:14.564Z [32minfo[39m: User disconnected: lAMPwaJhoEBBfPvGAAc8
+2024-09-16T05:23:14.841Z [32minfo[39m: A user connected: n8Ook26kqzqk8j86AAAe
+2024-09-16T05:23:14.841Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:23:14.844Z [32minfo[39m: A user connected: BSoKxAaJyVJW1q27AAAf
+2024-09-16T05:23:14.845Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:23:23.440Z [32minfo[39m: User disconnected: n8Ook26kqzqk8j86AAAe
+2024-09-16T05:23:23.443Z [32minfo[39m: User disconnected: BSoKxAaJyVJW1q27AAAf
+2024-09-16T05:23:23.715Z [32minfo[39m: A user connected: MwIlLSZ1kz31QYBsAAAo
+2024-09-16T05:23:23.716Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:23:23.718Z [32minfo[39m: A user connected: D7JayYcL0EKAzbWqAAAp
+2024-09-16T05:23:23.718Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:30:36.290Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:30:37.469Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:30:38.095Z [32minfo[39m: A user connected: WfO7uisuHuniILGLAAAD
+2024-09-16T05:30:38.095Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:30:38.099Z [32minfo[39m: A user connected: GxaaF9Ey5fzNtV0QAAAE
+2024-09-16T05:30:38.100Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:30:38.118Z [32minfo[39m: MongoDB connected
+2024-09-16T05:30:54.128Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:30:54.727Z [32minfo[39m: MongoDB connected
+2024-09-16T05:30:55.088Z [32minfo[39m: A user connected: badA1F7I01tqDW5dAAAD
+2024-09-16T05:30:55.089Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:30:55.090Z [32minfo[39m: A user connected: 5EVCc5hqel3t3RRIAAAE
+2024-09-16T05:30:55.090Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:31:01.059Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:31:01.781Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:31:02.088Z [32minfo[39m: A user connected: ZhLMDfmHK61bRivcAAAD
+2024-09-16T05:31:02.088Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:31:02.092Z [32minfo[39m: A user connected: FbFpdZyTNeA0XCLkAAAE
+2024-09-16T05:31:02.092Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:31:02.373Z [32minfo[39m: MongoDB connected
+2024-09-16T05:31:15.673Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:31:16.749Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:31:17.088Z [32minfo[39m: A user connected: 6XR44BkZMgMRbCARAAAC
+2024-09-16T05:31:17.088Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:31:17.092Z [32minfo[39m: A user connected: jq_IlcWyguK9lJeJAAAD
+2024-09-16T05:31:17.092Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:31:17.353Z [32minfo[39m: MongoDB connected
+2024-09-16T05:31:26.630Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:31:27.227Z [32minfo[39m: MongoDB connected
+2024-09-16T05:31:28.085Z [32minfo[39m: A user connected: cfA7Zczzysebz8EgAAAC
+2024-09-16T05:31:28.085Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:31:28.088Z [32minfo[39m: A user connected: RuHKspqLZRPVJLrNAAAD
+2024-09-16T05:31:28.088Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:31:33.035Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:31:33.804Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:31:34.097Z [32minfo[39m: A user connected: I9tPtFfWGdnvlmYjAAAB
+2024-09-16T05:31:34.097Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:31:34.441Z [32minfo[39m: MongoDB connected
+2024-09-16T05:31:35.084Z [32minfo[39m: A user connected: YVhg9JmIjsx7FzZ4AAAD
+2024-09-16T05:31:35.084Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:31:39.004Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:31:39.717Z [32minfo[39m: MongoDB connected
+2024-09-16T05:31:40.080Z [32minfo[39m: A user connected: oMAvH13GCrW1q5L2AAAC
+2024-09-16T05:31:40.081Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:31:40.083Z [32minfo[39m: A user connected: xkP3hZp5hRdemTKSAAAD
+2024-09-16T05:31:40.084Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:32:36.624Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T05:32:39.134Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:32:39.171Z [32minfo[39m: A user connected: IArCjMbvS3yrJYnVAAAE
+2024-09-16T05:32:39.172Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:32:39.176Z [32minfo[39m: A user connected: Jd4WjreqUos1KWCBAAAF
+2024-09-16T05:32:39.176Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:32:39.855Z [32minfo[39m: MongoDB connected
+2024-09-16T05:38:03.582Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:38:04.240Z [32minfo[39m: MongoDB connected
+2024-09-16T05:38:07.080Z [32minfo[39m: A user connected: cCAHGTLshQl8_vBnAAAE
+2024-09-16T05:38:07.080Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:38:07.081Z [32minfo[39m: A user connected: wva1ru6ol8YY5i2jAAAF
+2024-09-16T05:38:07.082Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T05:40:31.446Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:40:32.173Z [32minfo[39m: MongoDB connected
+2024-09-16T05:43:09.949Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T05:43:12.503Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:43:13.260Z [32minfo[39m: MongoDB connected
+2024-09-16T05:43:43.974Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:43:44.565Z [32minfo[39m: MongoDB connected
+2024-09-16T05:45:16.364Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:45:16.366Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:45:17.209Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:45:17.211Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:45:27.569Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:45:27.571Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:45:45.045Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:45:45.047Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:45:45.582Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:45:45.584Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:45:51.053Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:45:51.055Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:00.610Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:46:00.612Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:01.289Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:46:01.291Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:07.081Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:46:07.083Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:07.622Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:46:07.624Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:14.164Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:46:14.166Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:23.427Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:46:23.429Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:28.968Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:46:28.970Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:30.292Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:46:30.294Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:32.341Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:46:32.343Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:38.372Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:46:38.374Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:49.118Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:46:49.120Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:48:13.047Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:48:13.773Z [32minfo[39m: MongoDB connected
+2024-09-16T05:48:14.216Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:48:14.922Z [32minfo[39m: MongoDB connected
+2024-09-16T05:48:16.495Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:48:17.124Z [32minfo[39m: MongoDB connected
+2024-09-16T05:48:18.563Z [32minfo[39m: Server running on port 5000
+2024-09-16T05:48:19.195Z [32minfo[39m: MongoDB connected
+2024-09-16T06:32:26.918Z [32minfo[39m: Server running on port 5000
+2024-09-16T06:32:27.659Z [32minfo[39m: MongoDB connected
+2024-09-16T06:32:41.670Z [32minfo[39m: Server running on port 5000
+2024-09-16T06:32:42.306Z [32minfo[39m: MongoDB connected
+2024-09-16T06:32:47.058Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T06:33:03.904Z [32minfo[39m: Server running on port 5000
+2024-09-16T06:33:04.769Z [32minfo[39m: MongoDB connected
+2024-09-16T06:33:23.778Z [32minfo[39m: Shutting down gracefully...
+2024-09-16T06:33:25.929Z [32minfo[39m: Server running on port 5000
+2024-09-16T06:33:26.595Z [32minfo[39m: MongoDB connected
+2024-09-16T06:37:35.008Z [32minfo[39m: Server running on port 5000
+2024-09-16T06:37:35.658Z [32minfo[39m: Server running on port 5000
+2024-09-16T06:37:36.338Z [32minfo[39m: MongoDB connected
+2024-09-16T06:37:43.947Z [32minfo[39m: Server running on port 5000
+2024-09-16T06:37:44.565Z [32minfo[39m: MongoDB connected
+2024-09-16T06:43:19.688Z [31merror[39m: POST /api/videos/upload - Only video files are allowed
+2024-09-16T06:44:38.539Z [32minfo[39m: A user connected: 1dZ3SH2wXO8X7qflAAAB
+2024-09-16T06:44:38.540Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T06:44:39.991Z [32minfo[39m: User disconnected: 1dZ3SH2wXO8X7qflAAAB
+2024-09-16T06:44:40.021Z [32minfo[39m: A user connected: PI8obLrM_0vd2NXIAAAD
+2024-09-16T06:44:40.021Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.
+2024-09-16T06:44:40.726Z [32minfo[39m: User disconnected: PI8obLrM_0vd2NXIAAAD
+2024-09-16T06:44:40.756Z [32minfo[39m: A user connected: gLIC7ZYjbxtjGdbVAAAF
+2024-09-16T06:44:40.756Z [32minfo[39m: User 66e505f5624a41807df3fb80 joined their room.

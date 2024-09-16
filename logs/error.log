@@ -38,3 +38,21 @@
 2024-09-14T10:06:32.908Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
 2024-09-14T10:07:03.112Z [31merror[39m: Error during forgot password: Missing credentials for "PLAIN"
 2024-09-14T10:07:03.112Z [31merror[39m: Missing credentials for "PLAIN" - /api/users/request-reset-password - POST - ::1
+2024-09-16T05:45:16.366Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:45:17.211Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:45:27.571Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:45:45.047Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:45:45.584Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:45:51.055Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:00.612Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:01.291Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:07.083Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:07.624Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:14.166Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:23.429Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:28.970Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:30.294Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:32.343Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:38.374Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T05:46:49.120Z [31merror[39m: MongoDB connection error: option poolsize is not supported
+2024-09-16T06:43:19.688Z [31merror[39m: POST /api/videos/upload - Only video files are allowed
