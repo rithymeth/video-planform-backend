@@ -425,3 +425,11 @@
 {"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T07:55:05.017Z"}
 {"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T07:55:05.637Z"}
 {"level":"info","message":"Shutting down gracefully...","timestamp":"2024-09-16T07:58:21.006Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T07:58:23.318Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T07:58:24.005Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T08:02:20.416Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T08:02:21.120Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T08:02:25.786Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T08:02:26.402Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2024-09-16T08:03:50.777Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2024-09-16T08:03:51.449Z"}
